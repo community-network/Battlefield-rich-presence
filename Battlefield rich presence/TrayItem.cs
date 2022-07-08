@@ -33,6 +33,7 @@ namespace Battlefield_rich_presence
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             tray_icon.Visible = false;
 
+            this.send_thread.Abort();
             Application.Exit();
         }
     }
