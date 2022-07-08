@@ -9,13 +9,13 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3.0.2
         
     - name: setup MS-build
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v1.1
     
     - name: Setup Nuget
-      uses: Nuget/setup-nuget@v1.0.5
+      uses: Nuget/setup-nuget@v1.0.6
 
     - name: Restore nuget packages
       run: nuget restore "Battlefield rich presence.sln"
