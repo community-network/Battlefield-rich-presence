@@ -11,4 +11,4 @@ you only have to launch the exe and it will run in the background with a icon in
 
 to exit the tool, just rightclick the icon. it will show the exit option.
 
-![image](https://user-images.githubusercontent.com/22680656/177947453-b7c61efb-5320-449c-85e6-4c00b55405d1.png)
+![image](https://user-images.githubusercontent.com/22680656/177966169-0263011d-f5ba-4c07-8703-388392477c1d.png)
