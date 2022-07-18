@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Battlefield_rich_presence.Structs
+﻿namespace Battlefield_rich_presence.Structs
 {
     internal class PlayerList
     {

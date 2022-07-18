@@ -1,34 +1,42 @@
 ﻿using System;
 using System.Threading;
+using Battlefield_rich_presence.Resources;
+using Battlefield_rich_presence.Structs;
 using DiscordRPC;
 
 namespace Battlefield_rich_presence
 {
     internal class DiscordPresence
     {
+        private Config config;
         private DiscordRpcClient client;
-        private bool discord_is_running = false;
+        public bool discord_is_running = false;
         DateTime start_time;
 
-        private void StartStopDiscord()
+        public DiscordPresence()
         {
-            if (Game.IsRunning() && !discord_is_running)
+            config = new Config();
+        }
+
+        private void StartStopDiscord(GameInfo game_info)
+        {
+            if (game_info.is_running && !discord_is_running)
             {
                 client = new DiscordRpcClient("993783880777744524");
                 client.Initialize();
                 discord_is_running = true;
                 start_time = DateTime.UtcNow.AddSeconds(1);
             }
-            else if (!Game.IsRunning() && discord_is_running)
+            else if (!game_info.is_running && discord_is_running)
             {
                 client.Dispose();
                 discord_is_running = false;
             }
         }
 
-        private void UpdatePresenceInMenu()
+        private void UpdatePresenceInMenu(GameInfo game_info)
         {
-            if (Game.IsRunning() && discord_is_running)
+            if (game_info.is_running && discord_is_running)
             {
                 client.SetPresence(new RichPresence()
                 {
@@ -40,44 +48,28 @@ namespace Battlefield_rich_presence
                     },
                     Assets = new Assets()
                     {
-                        LargeImageKey = "bf1",
-                        LargeImageText = "Battlefield 1",
-                        SmallImageKey = "bf1"
+                        LargeImageKey = game_info.short_name,
+                        LargeImageText = game_info.game_name,
+                        SmallImageKey = game_info.short_name
                     },
 
                 });
             }
         }
 
-        private void UpdatePresence(GameReader.CurrentServerReader current_server_reader)
+        private void UpdatePresence(GameInfo game_info, ServerInfo server_info)
         {
             if (discord_is_running)
             {
                 try
                 {
-                    string game_id = Api.GetGameId(current_server_reader);
-                    //Set the rich presence
-                    //Call this as many times as you want and anywhere in your code.
-                    client.SetPresence(new RichPresence()
+                    if (Statics.frostbite3_games.Contains(game_info.short_name))
                     {
-                        Details = $"{current_server_reader.ServerName}",
-                        State = $"{current_server_reader.PlayerLists_All.Count} players",
-                        Timestamps = new Timestamps()
-                        {
-                            Start = start_time
-                        },
-                        Assets = new Assets()
-                        {
-                            LargeImageKey = "bf1",
-                            LargeImageText = "Battlefield 1",
-                            SmallImageKey = "bf1"
-                        },
-                        Buttons = new Button[] //$"{textBox10.Text}"
-                        {
-                        new Button() { Label = "Join", Url = $"https://joinme.click/g/bf1/{game_id}" },
-                        new Button() { Label = "View server", Url = $"https://gametools.network/servers/bf1/gameid/{game_id}/pc" }
-                        }
-                    });
+                        ChangePrensence.Frostbite3.Update(client, start_time, game_info, server_info);
+                    } else
+                    {
+
+                    }
                 }
                 catch (Exception)
                 {
@@ -90,21 +82,45 @@ namespace Battlefield_rich_presence
         {
             while (true)
             {
-                StartStopDiscord();
-                GameReader.CurrentServerReader current_server_reader = new GameReader.CurrentServerReader();
-                if (current_server_reader.hasResults)
+                GameInfo game_info = Game.IsRunning();
+                StartStopDiscord(game_info);
+                if (game_info.short_name == "bf1")
                 {
-                    if (current_server_reader.PlayerLists_All.Count > 0 && current_server_reader.ServerName != "")
+                    GameReader.CurrentServerReader current_server_reader = new GameReader.CurrentServerReader();
+                    if (current_server_reader.hasResults)
                     {
-                        UpdatePresence(current_server_reader);
+                        if (current_server_reader.PlayerLists_All.Count > 0 && current_server_reader.ServerName != "")
+                        {
+                            ServerInfo server_info = new ServerInfo
+                            {
+                                name = current_server_reader.ServerName,
+                                numPlayers = current_server_reader.PlayerLists_All.Count,
+                                maxPlayers = 0,
+                                ip = "",
+                                port = 0
+                            };
+                            UpdatePresence(game_info, server_info);
+                        }
+                        else
+                        {
+                            UpdatePresenceInMenu(game_info);
+                        }
                     }
-                    else
+                } else if (game_info.is_running)
+                {
+                    try
                     {
-                        UpdatePresenceInMenu();
+                        ServerInfo server_info = Api.OldTitleServerInfo(config, game_info.short_name);
+                        UpdatePresence(game_info, server_info);
+                    }
+                    catch (Exception)
+                    {
+                        UpdatePresenceInMenu(game_info);  
                     }
                 }
 
                 Thread.Sleep(10000);
+                config.Refresh();
             }
         }
     }
