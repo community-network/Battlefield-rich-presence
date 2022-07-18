@@ -11,4 +11,8 @@ you only have to launch the exe and it will run in the background with a icon in
 
 to exit the tool, just rightclick the icon. it will show the exit option.
 
-![image](https://user-images.githubusercontent.com/22680656/177966169-0263011d-f5ba-4c07-8703-388392477c1d.png)
+![image](https://user-images.githubusercontent.com/22680656/179611255-31dac7fe-962a-4796-837a-bbdc6830a2fc.png)
+
+to use the tool for bf4, bf3. bfvietnam, bfbc2, bf2, bf1942 and bf2142, will need you to set the playername with the edit settings button
+
+![image](https://user-images.githubusercontent.com/22680656/179611678-e874923d-36b3-4d5c-a807-61d13a6686f7.png)
