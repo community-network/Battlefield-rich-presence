@@ -26,11 +26,11 @@ namespace Battlefield_rich_presence.ChangePrensence
                 }
             };
             
-            if (Statics.joinme_click_games.Contains(game_info.short_name))
+            if (Statics.joinme_click_games.Contains(game_info.short_name) && server_info.joinLinkWeb != null)
             {
                 presence.Buttons = new Button[]
                 {
-                new Button() { Label = "Join", Url = $"https://joinme.click/g/{game_info.short_name}/{server_info.ip}:{server_info.port}" }
+                new Button() { Label = "Join", Url = server_info.joinLinkWeb }
                 };
             }
 

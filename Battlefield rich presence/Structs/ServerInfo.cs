@@ -7,5 +7,6 @@
         public int maxPlayers { get; set; }
         public string ip { get; set; }
         public int port { get; set; }
+        public string joinLinkWeb { get; set; }
     }
 }
