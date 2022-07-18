@@ -41,7 +41,7 @@ namespace Battlefield_rich_presence
                 client.SetPresence(new RichPresence()
                 {
                     Details = "In the menus",
-                    State = "0 players",
+                    State = "",
                     Timestamps = new Timestamps()
                     {
                         Start = start_time
