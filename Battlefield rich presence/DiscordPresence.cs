@@ -68,7 +68,7 @@ namespace Battlefield_rich_presence
                         ChangePrensence.Frostbite3.Update(client, start_time, game_info, server_info);
                     } else
                     {
-
+                        ChangePrensence.OlderTitles.Update(client, start_time, game_info, server_info);
                     }
                 }
                 catch (Exception)
