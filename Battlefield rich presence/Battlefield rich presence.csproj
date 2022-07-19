@@ -252,6 +252,9 @@
     <Compile Include="Structs\GameInfo.cs" />
     <Compile Include="Structs\PlayerList.cs" />
     <Compile Include="Structs\ServerInfo.cs" />
+    <Compile Include="TimerPlus.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TrayItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

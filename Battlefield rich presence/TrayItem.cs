@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace BattlefieldRichPresence
 {
     public class TrayItem : ApplicationContext
     {
+        TimerPlus _timer = new TimerPlus();
+        TimerPlus _trayUpdateTimer = new TimerPlus();
         private NotifyIcon _trayIcon;
-        private Thread _sendThread;
         private Config _config;
 
         public TrayItem()
@@ -20,16 +20,32 @@ namespace BattlefieldRichPresence
                 Icon = Properties.Resources.TrayIcon,
                 ContextMenu = new ContextMenu(new[] {
                 new MenuItem($"Player: {_config.PlayerName}", Void),
+                new MenuItem("Next update in ...", Void),
                 new MenuItem("Edit settings", Edit),
                 new MenuItem("Exit", Exit),
             }),
                 Visible = true
             };
             _trayIcon.ContextMenu.MenuItems[0].Enabled = false;
+            _trayIcon.ContextMenu.MenuItems[1].Enabled = false;
 
             DiscordPresence discordPresence = new DiscordPresence();
-            _sendThread = new Thread(discordPresence.Main);
-            _sendThread.Start();
+            // run on startup instead of 15 seconds later
+            discordPresence.Update();
+
+            // background update interval
+            _timer.Interval = 15000;
+            _timer.Elapsed += discordPresence.Update;
+            _timer.Start();
+
+            _trayUpdateTimer.Interval = 1000;
+            _trayUpdateTimer.Elapsed += UpdateTray;
+            _trayUpdateTimer.Start();
+        }
+
+        void UpdateTray(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            _trayIcon.ContextMenu.MenuItems[1].Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft)/1000}";
         }
 
         void Void(object sender, EventArgs e) { }
@@ -49,7 +65,8 @@ namespace BattlefieldRichPresence
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             _trayIcon.Visible = false;
 
-            _sendThread.Abort();
+            _timer.Dispose();
+            _trayUpdateTimer.Dispose();
             Application.Exit();
         }
     }

@@ -10,6 +10,7 @@ namespace BattlefieldRichPresence
 {
     internal class DiscordPresence
     {
+
         private readonly Config _config;
         private DiscordRpcClient _client;
         private bool _discordIsRunning;
@@ -112,53 +113,56 @@ namespace BattlefieldRichPresence
             }
         }
 
-        public void Main()
+        public void Update(object sender, System.Timers.ElapsedEventArgs e)
         {
-            while (true)
+            Update();
+        }
+
+        public void Update()
+        {
+            GameInfo gameInfo = Game.IsRunning();
+            StartStopDiscord(gameInfo);
+            if (gameInfo.Game == Statics.Game.Bf1)
             {
-                GameInfo gameInfo = Game.IsRunning();
-                StartStopDiscord(gameInfo);
-                if (gameInfo.Game == Statics.Game.Bf1)
+                CurrentServerReader currentServerReader = new CurrentServerReader();
+                if (currentServerReader.HasResults)
                 {
-                    CurrentServerReader currentServerReader = new CurrentServerReader();
-                    if (currentServerReader.HasResults)
+                    if (currentServerReader.PlayerListsAll.Count > 0 && currentServerReader.ServerName != "")
                     {
-                        if (currentServerReader.PlayerListsAll.Count > 0 && currentServerReader.ServerName != "")
+                        ServerInfo serverInfo = new ServerInfo
                         {
-                            ServerInfo serverInfo = new ServerInfo
-                            {
-                                Name = currentServerReader.ServerName,
-                                NumPlayers = currentServerReader.PlayerListsAll.Count,
-                                MaxPlayers = 0,
-                                JoinLinkWeb = ""
-                            };
-                            UpdatePresence(gameInfo, serverInfo);
-                        }
-                        else
-                        {
-                            UpdatePresenceInMenu(gameInfo);
-                        }
-                    }
-                } else if (gameInfo.IsRunning && _config.PlayerName != "")
-                {
-                    try
-                    {
-                        ServerInfo serverInfo = Api.OldTitleServerInfo(_config, gameInfo.ShortName);
+                            Name = currentServerReader.ServerName,
+                            NumPlayers = currentServerReader.PlayerListsAll.Count,
+                            MaxPlayers = 0,
+                            JoinLinkWeb = ""
+                        };
                         UpdatePresence(gameInfo, serverInfo);
                     }
-                    catch (Exception)
+                    else
                     {
-                        UpdatePresenceInMenu(gameInfo);  
+                        UpdatePresenceInMenu(gameInfo);
                     }
-                } else if (gameInfo.IsRunning)
-                {
-                    UpdatePresenceStatusUnknown(gameInfo, "Playername not configured");
                 }
-
-                Thread.Sleep(15000);
-                _previousGame = gameInfo.Game;
-                _config.Refresh();
             }
+            else if (gameInfo.IsRunning && _config.PlayerName != "")
+            {
+                try
+                {
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(_config, gameInfo.ShortName);
+                    UpdatePresence(gameInfo, serverInfo);
+                }
+                catch (Exception)
+                {
+                    UpdatePresenceInMenu(gameInfo);
+                }
+            }
+            else if (gameInfo.IsRunning)
+            {
+                UpdatePresenceStatusUnknown(gameInfo, "Playername not configured");
+            }
+
+            _previousGame = gameInfo.Game;
+            _config.Refresh();
         }
     }
 }
