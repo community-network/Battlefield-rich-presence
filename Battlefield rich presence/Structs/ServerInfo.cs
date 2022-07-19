@@ -33,7 +33,7 @@ namespace BattlefieldRichPresence.Structs
             return playerString;
         }
 
-        public string GetJoinUrl(GameInfo gameInfo)
+        public string GetViewUrl(GameInfo gameInfo)
         {
             if (gameInfo.Game == Statics.Game.Bf2)
             {

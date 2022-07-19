@@ -48,10 +48,10 @@ namespace BattlefieldRichPresence.ChangePrensence
                 buttons.Add(new Button { Label = "Join", Url = serverInfo.JoinLinkWeb });
             }
 
-            string joinUrl = serverInfo.GetJoinUrl(gameInfo);
-            if (joinUrl != null)
+            string viewUrl = serverInfo.GetViewUrl(gameInfo);
+            if (viewUrl != null)
             {
-                buttons.Add(new Button { Label = "View server", Url = joinUrl });
+                buttons.Add(new Button { Label = "View server", Url = viewUrl });
             }
             
             if (buttons.Count > 0)
