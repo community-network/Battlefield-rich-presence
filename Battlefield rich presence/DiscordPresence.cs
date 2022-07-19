@@ -14,7 +14,7 @@ namespace BattlefieldRichPresence
         private DiscordRpcClient _client;
         private bool _discordIsRunning;
         private DateTime _startTime;
-        private string _oldGame;
+        private Statics.Game _previousGame;
 
         public DiscordPresence()
         {
@@ -35,7 +35,7 @@ namespace BattlefieldRichPresence
                 _client.Dispose();
                 _discordIsRunning = false;
             // for weird edgecase where someone has 2 games running and quits one
-            } else if (gameInfo.IsRunning && _discordIsRunning && _oldGame != gameInfo.ShortName)
+            } else if (gameInfo.IsRunning && _discordIsRunning && _previousGame != gameInfo.Game)
             {
                 _client.Dispose();
                 _client = new DiscordRpcClient(Statics.GameClientIds[gameInfo.Game]);
@@ -156,7 +156,7 @@ namespace BattlefieldRichPresence
                 }
 
                 Thread.Sleep(10000);
-                _oldGame = gameInfo.ShortName;
+                _previousGame = gameInfo.Game;
                 _config.Refresh();
             }
         }
