@@ -51,6 +51,18 @@ namespace BattlefieldRichPresence.Resources
             Game.Bfvietnam,
             Game.Bf2
         };
+        public static readonly List<Game> GameTrackerGames = new List<Game>
+        {
+            Game.Bf1942,
+            Game.Bf2142,
+            Game.Bfvietnam,
+            Game.Bfbc2
+        };
+        public static readonly List<Game> GametoolsGames = new List<Game>
+        {
+            Game.Bf3,
+            //Game.Bfh
+        };
         public static readonly Dictionary<Game, string> GameClientIds = new Dictionary<Game, string>
         {
             { Game.Bf1942, "998710441595392090" },

@@ -7,7 +7,7 @@ namespace BattlefieldRichPresence
 {
     internal class Api
     {
-        public static string GetGameId(string gameName, string serverName)
+        public static ServerInfo GetServerInfo(string gameName, string serverName)
         {
             var post = new
             {
@@ -17,7 +17,8 @@ namespace BattlefieldRichPresence
             string dataString = jsonSerializer.Serialize(post);
             WebClient webClient = new WebClient();
             webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-            return webClient.UploadString(new Uri($"https://api.gametools.network/seedergameid/{gameName}"), "POST", dataString).Replace("\"", "");
+            string data = webClient.UploadString(new Uri($"https://api.gametools.network/seedergame/{gameName}"), "POST", dataString);
+            return jsonSerializer.Deserialize<ServerInfo>(data);
         }
 
         public static ServerInfo OldTitleServerInfo(Config config, string gameName)

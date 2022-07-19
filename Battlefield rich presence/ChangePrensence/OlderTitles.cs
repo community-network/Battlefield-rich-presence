@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
@@ -39,24 +40,23 @@ namespace BattlefieldRichPresence.ChangePrensence
                     SmallImageText = "Battlefield rich presence"
                 }
             };
-            
+
+            List<Button> buttons = new List<Button>();
+
             if (Statics.JoinmeDotClickGames.Contains(gameInfo.Game) && serverInfo.JoinLinkWeb != null)
             {
-                if (gameInfo.Game == Statics.Game.Bf2)
-                {
-                    presence.Buttons = new[]
-                    {
-                        new Button { Label = "Join", Url = serverInfo.JoinLinkWeb },
-                        new Button { Label = "View server", Url = $"https://bf2.tv/servers/{serverInfo.Ip}:{serverInfo.Port}" }
-                    };
-                }
-                else
-                {
-                    presence.Buttons = new[]
-                    {
-                        new Button { Label = "Join", Url = serverInfo.JoinLinkWeb }
-                    };
-                }
+                buttons.Add(new Button { Label = "Join", Url = serverInfo.JoinLinkWeb });
+            }
+
+            string joinUrl = serverInfo.GetJoinUrl(gameInfo);
+            if (joinUrl != null)
+            {
+                buttons.Add(new Button { Label = "View server", Url = joinUrl });
+            }
+            
+            if (buttons.Count > 0)
+            {
+                presence.Buttons = buttons.ToArray();
             }
 
             //Set the rich presence

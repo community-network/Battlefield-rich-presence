@@ -1,5 +1,4 @@
 ﻿using System;
-using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
 
@@ -9,13 +8,11 @@ namespace BattlefieldRichPresence.ChangePrensence
     {
         public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
-            string gameId = Api.GetGameId(gameInfo.ShortName, serverInfo.Name);
+            ServerInfo extraInfo = Api.GetServerInfo(gameInfo.ShortName, serverInfo.Name);
 
+            serverInfo.MaxPlayers = extraInfo.MaxPlayers;
             string state = serverInfo.GetPlayerCountString();
-            if (gameInfo.Game == Statics.Game.Bf4)
-            {
-                state += $" - {serverInfo.MapLabel}";
-            }
+            state += $" - {extraInfo.MapLabel}";
 
             //Set the rich presence
             //Call this as many times as you want and anywhere in your code.
@@ -36,8 +33,8 @@ namespace BattlefieldRichPresence.ChangePrensence
                 },
                 Buttons = new[] //$"{textBox10.Text}"
                 {
-                        new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName}/{gameId}" },
-                        new Button { Label = "View server", Url = $"https://gametools.network/servers/{gameInfo.ShortName}/gameid/{gameId}/pc" }
+                        new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName}/{extraInfo.GameId}" },
+                        new Button { Label = "View server", Url = $"https://gametools.network/servers/{gameInfo.ShortName}/gameid/{extraInfo.GameId}/pc" }
                 }
             });
         }
