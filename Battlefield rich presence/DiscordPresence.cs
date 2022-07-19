@@ -57,6 +57,28 @@ namespace Battlefield_rich_presence
             }
         }
 
+        private void UpdatePresenceStatusUnknown(GameInfo gameInfo, string reason)
+        {
+            if (gameInfo.is_running && discord_is_running)
+            {
+                client.SetPresence(new RichPresence()
+                {
+                    Details = "Status unknown",
+                    State = reason,
+                    Timestamps = new Timestamps()
+                    {
+                        Start = start_time
+                    },
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = gameInfo.short_name,
+                        LargeImageText = gameInfo.game_name,
+                        SmallImageKey = gameInfo.short_name
+                    }
+                });
+            }
+        }
+
         private void UpdatePresence(GameInfo game_info, ServerInfo server_info)
         {
             if (discord_is_running)
@@ -106,7 +128,7 @@ namespace Battlefield_rich_presence
                             UpdatePresenceInMenu(game_info);
                         }
                     }
-                } else if (game_info.is_running)
+                } else if (game_info.is_running && config.playerName != "")
                 {
                     try
                     {
@@ -117,6 +139,9 @@ namespace Battlefield_rich_presence
                     {
                         UpdatePresenceInMenu(game_info);  
                     }
+                } else if (game_info.is_running)
+                {
+                    UpdatePresenceStatusUnknown(game_info, "Playername not configured");
                 }
 
                 Thread.Sleep(10000);
