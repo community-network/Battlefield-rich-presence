@@ -1,5 +1,15 @@
-# Battlefield 1 rich presence
-This tool allows you to show others in discord which server you are in inside Battlefield 1 with a join button via joinme.click and view serverinfo via gametools server details page.
+# Battlefield rich presence
+This tool allows you to show others in discord which server you are in inside Battlefield with a join button via joinme.click and view serverinfo via gametools server details page for bf4 and bf1.
+
+Supported games:
+- Battlefield 1
+- Battlefield 3
+- Battlefield 4
+- Battlefield Vietnam
+- Battlefield bad company 2
+- Battlefield 2
+- Battlefield 2142
+- Battlefield 1942
 
 <img src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" data-canonical-src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" width="206" height="429" />
 
