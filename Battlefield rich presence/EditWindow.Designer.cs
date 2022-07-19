@@ -31,6 +31,7 @@ namespace BattlefieldRichPresence
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditWindow));
             this.PlayerNameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
@@ -71,8 +72,9 @@ namespace BattlefieldRichPresence
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PlayerNameBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditWindow";
-            this.Text = "Form1";
+            this.Text = "Edit settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 
