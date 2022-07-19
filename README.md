@@ -11,6 +11,7 @@ Show your current Battlefield server via Discord rich presence. Others can join 
 - Battlefield: Bad Company 2
 - Battlefield 3
 - Battlefield 4
+- Battlefield Hardline
 - Battlefield 1
 
 Download the tool via the release tab on GitHub: https://github.com/community-network/Battlefield-rich-presence/releases/
