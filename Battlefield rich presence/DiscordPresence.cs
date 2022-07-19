@@ -155,7 +155,7 @@ namespace BattlefieldRichPresence
                     UpdatePresenceStatusUnknown(gameInfo, "Playername not configured");
                 }
 
-                Thread.Sleep(30000);
+                Thread.Sleep(15000);
                 _previousGame = gameInfo.Game;
                 _config.Refresh();
             }
