@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BattlefieldRichPresence.Properties;
 
-namespace Battlefield_rich_presence
+namespace BattlefieldRichPresence
 {
     internal class Config
     {
-        public string playerName;
+        public string PlayerName;
 
         public Config()
         {
@@ -17,13 +13,13 @@ namespace Battlefield_rich_presence
 
         public void Refresh()
         {
-            playerName = Properties.Settings.Default.playerName;
+            PlayerName = Settings.Default.playerName;
         }
 
         public void Update()
         {
-            Properties.Settings.Default.playerName = playerName;
-            Properties.Settings.Default.Save();
+            Settings.Default.playerName = PlayerName;
+            Settings.Default.Save();
         }
     }
 }

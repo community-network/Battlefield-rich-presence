@@ -1,49 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Battlefield_rich_presence
+namespace BattlefieldRichPresence
 {
     public partial class EditWindow : Form
     {
-        private Config config;
+        private Config _config;
 
         public EditWindow()
         {
             InitializeComponent();
-            this.config = new Config();
-            this.PlayerNameBox.Text = config.playerName;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.FormClosing += EditFormClosing;
+            _config = new Config();
+            PlayerNameBox.Text = _config.PlayerName;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormClosing += EditFormClosing;
         }
 
         private void EditFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!PlayerNameBox.Text.Equals(config.playerName))
+            if (!PlayerNameBox.Text.Equals(_config.PlayerName))
             {
                 DialogResult dialogResult = MessageBox.Show("You have unsaved changes, do want to save them?", "Message editor", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    this.Save();
+                    Save();
                 }
             }
         }
 
         private void Save()
         {
-            config.playerName = PlayerNameBox.Text;
-            config.Update();
+            _config.PlayerName = PlayerNameBox.Text;
+            _config.Update();
         }
 
         private async void SaveButton_Click(object sender, EventArgs e)
         {
-            this.Save();
+            Save();
             SaveButton.Text = "Saved!";
             await Task.Delay(1000);
             SaveButton.Text = "Save";

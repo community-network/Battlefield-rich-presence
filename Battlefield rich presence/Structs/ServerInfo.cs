@@ -1,12 +1,12 @@
-﻿namespace Battlefield_rich_presence.Structs
+﻿namespace BattlefieldRichPresence.Structs
 {
     internal class ServerInfo
     {
-        public string name { get; set; }
-        public int numPlayers { get; set; }
-        public int maxPlayers { get; set; }
-        public string ip { get; set; }
-        public int port { get; set; }
-        public string joinLinkWeb { get; set; }
+        public string Name { get; set; }
+        public int NumPlayers { get; set; }
+        public int MaxPlayers { get; set; }
+        public string Ip { get; set; }
+        public int Port { get; set; }
+        public string JoinLinkWeb { get; set; }
     }
 }

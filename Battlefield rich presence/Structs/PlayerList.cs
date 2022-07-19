@@ -1,16 +1,16 @@
-﻿namespace Battlefield_rich_presence.Structs
+﻿namespace BattlefieldRichPresence.Structs
 {
     internal class PlayerList
     {
-        public int index { get; set; }
-        public int teamId { get; set; }
-        public byte mark { get; set; }
+        public int Index { get; set; }
+        public int TeamId { get; set; }
+        public byte Mark { get; set; }
 
-        public int rank { get; set; }
-        public string name { get; set; }
-        public long player_id { get; set; }
-        public int kills { get; set; }
-        public int deaths { get; set; }
-        public int score { get; set; }
+        public int Rank { get; set; }
+        public string Name { get; set; }
+        public long PlayerId { get; set; }
+        public int Kills { get; set; }
+        public int Deaths { get; set; }
+        public int Score { get; set; }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace Battlefield_rich_presence.GameReader
+namespace BattlefieldRichPresence.GameReader
 {
     internal class Memory
     {
-        private static IntPtr processHandle;
-        private static long processBaseAddress;
+        private static IntPtr _processHandle;
+        private static long _processBaseAddress;
 
         public static bool Initialize()
         {
@@ -16,32 +16,28 @@ namespace Battlefield_rich_presence.GameReader
             if (pArray.Length > 0)
             {
                 var process = pArray[0];
-                processHandle = OpenProcess(ProcessAccessFlags.VirtualMemoryRead, false, process.Id);
+                _processHandle = OpenProcess(ProcessAccessFlags.VirtualMemoryRead, false, process.Id);
                 if (process.MainModule != null)
                 {
-                    processBaseAddress = process.MainModule.BaseAddress.ToInt64();
+                    _processBaseAddress = process.MainModule.BaseAddress.ToInt64();
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
+
                 return false;
             }
+
+            return false;
         }
 
         public static void CloseHandle()
         {
-            if (processHandle != IntPtr.Zero)
-                CloseHandle(processHandle);
+            if (_processHandle != IntPtr.Zero)
+                CloseHandle(_processHandle);
         }
 
         public static long GetBaseAddress()
         {
-            return processBaseAddress;
+            return _processBaseAddress;
         }
 
         private static long GetPtrAddress(long pointer, int[] offset)
@@ -49,12 +45,12 @@ namespace Battlefield_rich_presence.GameReader
             if (offset != null)
             {
                 byte[] buffer = new byte[8];
-                ReadProcessMemory(processHandle, pointer, buffer, buffer.Length, out _);
+                ReadProcessMemory(_processHandle, pointer, buffer, buffer.Length, out _);
 
                 for (int i = 0; i < (offset.Length - 1); i++)
                 {
                     pointer = BitConverter.ToInt64(buffer, 0) + offset[i];
-                    ReadProcessMemory(processHandle, pointer, buffer, buffer.Length, out _);
+                    ReadProcessMemory(_processHandle, pointer, buffer, buffer.Length, out _);
                 }
 
                 pointer = BitConverter.ToInt64(buffer, 0) + offset[offset.Length - 1];
@@ -66,56 +62,56 @@ namespace Battlefield_rich_presence.GameReader
         public static T Read<T>(long basePtr, int[] offsets) where T : struct
         {
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
-            ReadProcessMemory(processHandle, GetPtrAddress(basePtr, offsets), buffer, buffer.Length, out _);
+            ReadProcessMemory(_processHandle, GetPtrAddress(basePtr, offsets), buffer, buffer.Length, out _);
             return ByteArrayToStructure<T>(buffer);
         }
 
         public static T Read<T>(long address) where T : struct
         {
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
-            ReadProcessMemory(processHandle, address, buffer, buffer.Length, out _);
+            ReadProcessMemory(_processHandle, address, buffer, buffer.Length, out _);
             return ByteArrayToStructure<T>(buffer);
         }
 
         public static string ReadString(long address, int size)
         {
-            byte[] buffer = new byte[size];
-            ReadProcessMemory(processHandle, address, buffer, size, out _);
+            byte[] processMemoryBuffer = new byte[size];
+            ReadProcessMemory(_processHandle, address, processMemoryBuffer, size, out _);
 
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0; i < processMemoryBuffer.Length; i++)
             {
-                if (buffer[i] == 0)
+                if (processMemoryBuffer[i] == 0)
                 {
-                    byte[] _buffer = new byte[i];
-                    Buffer.BlockCopy(buffer, 0, _buffer, 0, i);
-                    return Encoding.ASCII.GetString(_buffer);
+                    byte[] blockBuffer = new byte[i];
+                    Buffer.BlockCopy(processMemoryBuffer, 0, blockBuffer, 0, i);
+                    return Encoding.ASCII.GetString(blockBuffer);
                 }
             }
 
-            return Encoding.ASCII.GetString(buffer);
+            return Encoding.ASCII.GetString(processMemoryBuffer);
         }
 
         public static string ReadString(long basePtr, int[] offsets, int size)
         {
-            byte[] buffer = new byte[size];
-            ReadProcessMemory(processHandle, GetPtrAddress(basePtr, offsets), buffer, size, out _);
+            byte[] processMemoryBuffer = new byte[size];
+            ReadProcessMemory(_processHandle, GetPtrAddress(basePtr, offsets), processMemoryBuffer, size, out _);
 
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0; i < processMemoryBuffer.Length; i++)
             {
-                if (buffer[i] == 0)
+                if (processMemoryBuffer[i] == 0)
                 {
-                    byte[] _buffer = new byte[i];
-                    Buffer.BlockCopy(buffer, 0, _buffer, 0, i);
-                    return Encoding.ASCII.GetString(_buffer);
+                    byte[] blockBuffer = new byte[i];
+                    Buffer.BlockCopy(processMemoryBuffer, 0, blockBuffer, 0, i);
+                    return Encoding.ASCII.GetString(blockBuffer);
                 }
             }
 
-            return Encoding.ASCII.GetString(buffer);
+            return Encoding.ASCII.GetString(processMemoryBuffer);
         }
 
-        public static bool IsValid(long Address)
+        public static bool IsValid(long address)
         {
-            return Address >= 0x10000 && Address < 0x000F000000000000;
+            return address >= 0x10000 && address < 0x000F000000000000;
         }
 
         private static T ByteArrayToStructure<T>(byte[] bytes) where T : struct

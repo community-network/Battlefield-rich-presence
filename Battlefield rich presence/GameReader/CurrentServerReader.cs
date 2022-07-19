@@ -1,35 +1,36 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using BattlefieldRichPresence.Structs;
 
-namespace Battlefield_rich_presence.GameReader
+namespace BattlefieldRichPresence.GameReader
 {
 
     internal class CurrentServerReader
     {
-        public List<Structs.PlayerList> PlayerLists_All { get; private set; }
-        public List<Structs.PlayerList> PlayerLists_Team1 { get; private set; }
-        public List<Structs.PlayerList> PlayerLists_Team2 { get; private set; }
-        public ObservableCollection<Structs.PlayerList> ListBox_PlayerList_Team1 { get; private set; }
-        public ObservableCollection<Structs.PlayerList> ListBox_PlayerList_Team2 { get; private set; }
+        public List<PlayerList> PlayerListsAll { get; private set; }
+        public List<PlayerList> PlayerListsTeam1 { get; private set; }
+        public List<PlayerList> PlayerListsTeam2 { get; private set; }
+        public ObservableCollection<PlayerList> ListBoxPlayerListTeam1 { get; private set; }
+        public ObservableCollection<PlayerList> ListBoxPlayerListTeam2 { get; private set; }
 
         public string ServerName { get; private set; }
         public DateTime RefreshTime { get; private set; }
-        public bool hasResults { get; private set; }
+        public bool HasResults { get; private set; }
         public int ServerScoreTeam1 { get; private set; }
         public int ServerScoreTeam2 { get; private set; }
 
         public CurrentServerReader()
         {
-            PlayerLists_All = new List<Structs.PlayerList>();
-            PlayerLists_Team1 = new List<Structs.PlayerList>();
-            PlayerLists_Team2 = new List<Structs.PlayerList>();
+            PlayerListsAll = new List<PlayerList>();
+            PlayerListsTeam1 = new List<PlayerList>();
+            PlayerListsTeam2 = new List<PlayerList>();
 
-            ListBox_PlayerList_Team1 = new ObservableCollection<Structs.PlayerList>();
-            ListBox_PlayerList_Team2 = new ObservableCollection<Structs.PlayerList>();
+            ListBoxPlayerListTeam1 = new ObservableCollection<PlayerList>();
+            ListBoxPlayerListTeam2 = new ObservableCollection<PlayerList>();
 
-            hasResults = false;
+            HasResults = false;
             Refresh();
         }
 
@@ -37,109 +38,109 @@ namespace Battlefield_rich_presence.GameReader
         {
             if (Memory.Initialize())
             {
-                ServerScoreTeam1 = Memory.Read<int>(Memory.GetBaseAddress() + Offsets.ServerScore_Offset, Offsets.ServerScoreTeam1);
-                ServerScoreTeam2 = Memory.Read<int>(Memory.GetBaseAddress() + Offsets.ServerScore_Offset, Offsets.ServerScoreTeam2);
-                ServerName = Memory.ReadString(Memory.GetBaseAddress() + Offsets.ServerName_Offset, Offsets.ServerName, 64);
+                ServerScoreTeam1 = Memory.Read<int>(Memory.GetBaseAddress() + Offsets.ServerScoreOffset, Offsets.ServerScoreTeam1);
+                ServerScoreTeam2 = Memory.Read<int>(Memory.GetBaseAddress() + Offsets.ServerScoreOffset, Offsets.ServerScoreTeam2);
+                ServerName = Memory.ReadString(Memory.GetBaseAddress() + Offsets.ServerNameOffset, Offsets.ServerName, 64);
                 ServerName = string.IsNullOrEmpty(ServerName) ? "" : ServerName;
 
                 // player data
 
                 for (int i = 0; i < 74; i++)
                 {
-                    var pClientPlayerBA = Player.GetPlayerById(i);
-                    if (!Memory.IsValid(pClientPlayerBA))
+                    var pClientPlayerBa = Player.GetPlayerById(i);
+                    if (!Memory.IsValid(pClientPlayerBa))
                         continue;
 
-                    var Name = Memory.ReadString(pClientPlayerBA + 0x2156, 64);
-                    var TeamID = Memory.Read<int>(pClientPlayerBA + 0x1C34);
-                    var Mark = Memory.Read<byte>(pClientPlayerBA + 0x1D7C);
-                    var PersionID = Memory.Read<long>(pClientPlayerBA + 0x38);
+                    var name = Memory.ReadString(pClientPlayerBa + 0x2156, 64);
+                    var teamId = Memory.Read<int>(pClientPlayerBa + 0x1C34);
+                    var mark = Memory.Read<byte>(pClientPlayerBa + 0x1D7C);
+                    var persionId = Memory.Read<long>(pClientPlayerBa + 0x38);
 
-                    PlayerLists_All.Add(new Structs.PlayerList()
+                    PlayerListsAll.Add(new PlayerList
                     {
-                        teamId = TeamID,
-                        mark = Mark,
-                        rank = 0,
-                        name = Name,
-                        player_id = PersionID,
-                        kills = 0,
-                        deaths = 0,
-                        score = 0
+                        TeamId = teamId,
+                        Mark = mark,
+                        Rank = 0,
+                        Name = name,
+                        PlayerId = persionId,
+                        Kills = 0,
+                        Deaths = 0,
+                        Score = 0
                     });
                 }
 
                 // scoreboard data
 
-                var pClientScoreBA = Memory.Read<long>(Memory.GetBaseAddress() + 0x39EB8D8);
-                pClientScoreBA = Memory.Read<long>(pClientScoreBA + 0x68);
+                var pClientScoreBa = Memory.Read<long>(Memory.GetBaseAddress() + 0x39EB8D8);
+                pClientScoreBa = Memory.Read<long>(pClientScoreBa + 0x68);
 
                 for (int i = 0; i < 74; i++)
                 {
-                    pClientScoreBA = Memory.Read<long>(pClientScoreBA);
-                    var pClientScoreOffset = Memory.Read<long>(pClientScoreBA + 0x10);
-                    if (!Memory.IsValid(pClientScoreBA))
+                    pClientScoreBa = Memory.Read<long>(pClientScoreBa);
+                    var pClientScoreOffset = Memory.Read<long>(pClientScoreBa + 0x10);
+                    if (!Memory.IsValid(pClientScoreBa))
                         continue;
 
-                    var Mark = Memory.Read<byte>(pClientScoreOffset + 0x300);
-                    var Rank = Memory.Read<int>(pClientScoreOffset + 0x304);
-                    if (Rank == 0)
+                    var mark = Memory.Read<byte>(pClientScoreOffset + 0x300);
+                    var rank = Memory.Read<int>(pClientScoreOffset + 0x304);
+                    if (rank == 0)
                         continue;
-                    var Kill = Memory.Read<int>(pClientScoreOffset + 0x308);
-                    var Dead = Memory.Read<int>(pClientScoreOffset + 0x30C);
-                    var Score = Memory.Read<int>(pClientScoreOffset + 0x314);
+                    var kill = Memory.Read<int>(pClientScoreOffset + 0x308);
+                    var dead = Memory.Read<int>(pClientScoreOffset + 0x30C);
+                    var score = Memory.Read<int>(pClientScoreOffset + 0x314);
 
-                    int index = PlayerLists_All.FindIndex(val => val.mark == Mark);
+                    int index = PlayerListsAll.FindIndex(val => val.Mark == mark);
                     if (index != -1)
                     {
-                        PlayerLists_All[index].rank = Rank;
-                        PlayerLists_All[index].kills = Kill;
-                        PlayerLists_All[index].deaths = Dead;
-                        PlayerLists_All[index].score = Score;
+                        PlayerListsAll[index].Rank = rank;
+                        PlayerListsAll[index].Kills = kill;
+                        PlayerListsAll[index].Deaths = dead;
+                        PlayerListsAll[index].Score = score;
                     }
                 }
 
                 // Team data collation
 
-                foreach (var item in PlayerLists_All)
+                foreach (var item in PlayerListsAll)
                 {
-                    if (item.teamId == 1)
+                    if (item.TeamId == 1)
                     {
-                        PlayerLists_Team1.Add(item);
+                        PlayerListsTeam1.Add(item);
                     }
-                    else if (item.teamId == 2)
+                    else if (item.TeamId == 2)
                     {
-                        PlayerLists_Team2.Add(item);
+                        PlayerListsTeam2.Add(item);
                     }
                 }
 
                 //PlayerLists_Team1.Sort((a, b) => b.Score.CompareTo(a.Score));
                 //PlayerLists_Team2.Sort((a, b) => b.Score.CompareTo(a.Score));
 
-                PlayerLists_Team1 = PlayerLists_Team1.OrderByDescending(o => o.score).ToList();
-                PlayerLists_Team2 = PlayerLists_Team2.OrderByDescending(o => o.score).ToList();
+                PlayerListsTeam1 = PlayerListsTeam1.OrderByDescending(o => o.Score).ToList();
+                PlayerListsTeam2 = PlayerListsTeam2.OrderByDescending(o => o.Score).ToList();
 
                 int count = 1;
-                for (int i = 0; i < PlayerLists_Team1.Count; i++)
+                for (int i = 0; i < PlayerListsTeam1.Count; i++)
                 {
-                    PlayerLists_Team1[i].index = count++;
-                    ListBox_PlayerList_Team1.Add(PlayerLists_Team1[i]);
+                    PlayerListsTeam1[i].Index = count++;
+                    ListBoxPlayerListTeam1.Add(PlayerListsTeam1[i]);
                 }
 
                 count = 1;
-                for (int i = 0; i < PlayerLists_Team2.Count; i++)
+                for (int i = 0; i < PlayerListsTeam2.Count; i++)
                 {
-                    PlayerLists_Team2[i].index = count++;
-                    ListBox_PlayerList_Team2.Add(PlayerLists_Team2[i]);
+                    PlayerListsTeam2[i].Index = count++;
+                    ListBoxPlayerListTeam2.Add(PlayerListsTeam2[i]);
                 }
 
                 RefreshTime = DateTime.Now;
-                hasResults = true;
+                HasResults = true;
 
                 Memory.CloseHandle();
             }
             else
             {
-                hasResults = false;
+                HasResults = false;
             }
         }
     }

@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C4714C39-39F4-47F9-9874-74A6CB2F59E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Battlefield_rich_presence</RootNamespace>
+    <RootNamespace>BattlefieldRichPresence</RootNamespace>
     <AssemblyName>Battlefield rich presence</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

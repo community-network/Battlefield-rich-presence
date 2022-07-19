@@ -1,36 +1,36 @@
 ﻿using System;
-using Battlefield_rich_presence.Resources;
-using Battlefield_rich_presence.Structs;
+using BattlefieldRichPresence.Resources;
+using BattlefieldRichPresence.Structs;
 using DiscordRPC;
 
-namespace Battlefield_rich_presence.ChangePrensence
+namespace BattlefieldRichPresence.ChangePrensence
 {
     internal class OlderTitles
     {
-        public static void Update(DiscordRpcClient client, DateTime start_time, GameInfo game_info, ServerInfo server_info)
+        public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
 
-            RichPresence presence = new RichPresence()
+            RichPresence presence = new RichPresence
             {
-                Details = $"{server_info.name}",
-                State = $"{game_info.game_name} - {server_info.numPlayers}/{server_info.maxPlayers} players",
-                Timestamps = new Timestamps()
+                Details = $"{serverInfo.Name}",
+                State = $"{gameInfo.GameName} - {serverInfo.NumPlayers}/{serverInfo.MaxPlayers} players",
+                Timestamps = new Timestamps
                 {
-                    Start = start_time
+                    Start = startTime
                 },
-                Assets = new Assets()
+                Assets = new Assets
                 {
-                    LargeImageKey = game_info.short_name,
-                    LargeImageText = game_info.game_name,
-                    SmallImageKey = game_info.short_name
+                    LargeImageKey = gameInfo.ShortName,
+                    LargeImageText = gameInfo.GameName,
+                    SmallImageKey = gameInfo.ShortName
                 }
             };
             
-            if (Statics.joinme_click_games.Contains(game_info.short_name) && server_info.joinLinkWeb != null)
+            if (Statics.JoinmeClickGames.Contains(gameInfo.ShortName) && serverInfo.JoinLinkWeb != null)
             {
-                presence.Buttons = new Button[]
+                presence.Buttons = new[]
                 {
-                new Button() { Label = "Join", Url = server_info.joinLinkWeb }
+                new Button { Label = "Join", Url = serverInfo.JoinLinkWeb }
                 };
             }
 

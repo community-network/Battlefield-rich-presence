@@ -1,19 +1,20 @@
-﻿using Battlefield_rich_presence.Resources;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using BattlefieldRichPresence.Resources;
+using BattlefieldRichPresence.Structs;
 
-namespace Battlefield_rich_presence
+namespace BattlefieldRichPresence
 {
     internal class Game
     {
 
-        public static Structs.GameInfo IsRunning()
+        public static GameInfo IsRunning()
         {
-            Process[] process_collection = Process.GetProcesses();
-            foreach (Process p in process_collection)
+            Process[] processCollection = Process.GetProcesses();
+            foreach (Process p in processCollection)
             {
-                Regex rgx = new Regex(Statics.supported_games, RegexOptions.IgnoreCase);
+                Regex rgx = new Regex(Statics.SupportedGames, RegexOptions.IgnoreCase);
                 Match match = rgx.Match(p.MainWindowTitle);
                 if (match.Success)
                 {
@@ -23,21 +24,21 @@ namespace Battlefield_rich_presence
                         Group grp = match.Groups[name];
                         if (!Int32.TryParse(name, out _) && grp.Value != "")
                         {
-                            return new Structs.GameInfo
+                            return new GameInfo
                             {
-                                is_running = true,
-                                short_name = name,
-                                game_name = Statics.full_game_name[name]
+                                IsRunning = true,
+                                ShortName = name,
+                                GameName = Statics.FullGameName[name]
                             };
                         }
                     }
                 }
             }
-            return new Structs.GameInfo
+            return new GameInfo
             {
-                is_running = false,
-                short_name = "",
-                game_name = ""
+                IsRunning = false,
+                ShortName = "",
+                GameName = ""
             };
         }
     }

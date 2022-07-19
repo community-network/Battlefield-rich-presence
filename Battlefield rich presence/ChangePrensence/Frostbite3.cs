@@ -1,41 +1,41 @@
 ﻿using System;
-using Battlefield_rich_presence.Structs;
+using BattlefieldRichPresence.Structs;
 using DiscordRPC;
 
-namespace Battlefield_rich_presence.ChangePrensence
+namespace BattlefieldRichPresence.ChangePrensence
 {
     internal class Frostbite3
     {
-        public static void Update(DiscordRpcClient client, DateTime start_time, GameInfo game_info, ServerInfo server_info)
+        public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
-            string game_id = Api.GetGameId(game_info.short_name, server_info.name);
+            string gameId = Api.GetGameId(gameInfo.ShortName, serverInfo.Name);
 
-            string state = $"{game_info.game_name} - {server_info.numPlayers} players";
-            if (server_info.maxPlayers > 0)
+            string state = $"{gameInfo.GameName} - {serverInfo.NumPlayers} players";
+            if (serverInfo.MaxPlayers > 0)
             {
-                state = $"{game_info.game_name} - {server_info.numPlayers}/{server_info.maxPlayers} players";
+                state = $"{gameInfo.GameName} - {serverInfo.NumPlayers}/{serverInfo.MaxPlayers} players";
             }
 
             //Set the rich presence
             //Call this as many times as you want and anywhere in your code.
-            client.SetPresence(new RichPresence()
+            client.SetPresence(new RichPresence
             {
-                Details = $"{server_info.name}",
+                Details = $"{serverInfo.Name}",
                 State = state,
-                Timestamps = new Timestamps()
+                Timestamps = new Timestamps
                 {
-                    Start = start_time
+                    Start = startTime
                 },
-                Assets = new Assets()
+                Assets = new Assets
                 {
-                    LargeImageKey = game_info.short_name,
-                    LargeImageText = game_info.game_name,
-                    SmallImageKey = game_info.short_name
+                    LargeImageKey = gameInfo.ShortName,
+                    LargeImageText = gameInfo.GameName,
+                    SmallImageKey = gameInfo.ShortName
                 },
-                Buttons = new Button[] //$"{textBox10.Text}"
+                Buttons = new[] //$"{textBox10.Text}"
                 {
-                        new Button() { Label = "Join", Url = $"https://joinme.click/g/{game_info.short_name}/{game_id}" },
-                        new Button() { Label = "View server", Url = $"https://gametools.network/servers/{game_info.short_name}/gameid/{game_id}/pc" }
+                        new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName}/{gameId}" },
+                        new Button { Label = "View server", Url = $"https://gametools.network/servers/{gameInfo.ShortName}/gameid/{gameId}/pc" }
                 }
             });
         }

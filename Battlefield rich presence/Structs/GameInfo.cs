@@ -1,9 +1,9 @@
-﻿namespace Battlefield_rich_presence.Structs
+﻿namespace BattlefieldRichPresence.Structs
 {
     internal class GameInfo
     {
-        public bool is_running { get; set; }
-        public string game_name { get; set; }
-        public string short_name { get; set; }
+        public bool IsRunning { get; set; }
+        public string GameName { get; set; }
+        public string ShortName { get; set; }
     }
 }

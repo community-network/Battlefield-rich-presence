@@ -2,54 +2,54 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Battlefield_rich_presence
+namespace BattlefieldRichPresence
 {
     public class TrayItem : ApplicationContext
     {
-        private NotifyIcon tray_icon;
-        private Thread send_thread;
-        private Config config;
+        private NotifyIcon _trayIcon;
+        private Thread _sendThread;
+        private Config _config;
 
         public TrayItem()
         {
-            config = new Config();
+            _config = new Config();
             // Initialize Tray Icon
-            tray_icon = new NotifyIcon()
+            _trayIcon = new NotifyIcon
             {
                 Text = "Battlefield rich presence",
                 Icon = Properties.Resources.TrayIcon,
-                ContextMenu = new ContextMenu(new MenuItem[] {
-                new MenuItem($"Player: {config.playerName}", Void),
+                ContextMenu = new ContextMenu(new[] {
+                new MenuItem($"Player: {_config.PlayerName}", Void),
                 new MenuItem("Edit settings", Edit),
                 new MenuItem("Exit", Exit),
             }),
                 Visible = true
             };
-            tray_icon.ContextMenu.MenuItems[0].Enabled = false;
+            _trayIcon.ContextMenu.MenuItems[0].Enabled = false;
 
             DiscordPresence discordPresence = new DiscordPresence();
-            this.send_thread = new Thread(new ThreadStart(discordPresence.Main));
-            this.send_thread.Start();
+            _sendThread = new Thread(discordPresence.Main);
+            _sendThread.Start();
         }
 
         void Void(object sender, EventArgs e) { }
 
         void Edit(object sender, EventArgs e)
         {
-            using (var edit_window = new EditWindow())
+            using (var editWindow = new EditWindow())
             {
-                DialogResult result = edit_window.ShowDialog();
-                config.Refresh();
-                tray_icon.ContextMenu.MenuItems[0].Text = $"Player: {config.playerName}";
+                DialogResult result = editWindow.ShowDialog();
+                _config.Refresh();
+                _trayIcon.ContextMenu.MenuItems[0].Text = $"Player: {_config.PlayerName}";
             }
         }
 
         void Exit(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
-            tray_icon.Visible = false;
+            _trayIcon.Visible = false;
 
-            this.send_thread.Abort();
+            _sendThread.Abort();
             Application.Exit();
         }
     }

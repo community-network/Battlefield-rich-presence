@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Battlefield_rich_presence
+namespace BattlefieldRichPresence
 {
     internal static class Program
     {
@@ -20,7 +21,7 @@ namespace Battlefield_rich_presence
             Application.Run(new TrayItem());
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
     }
 }
