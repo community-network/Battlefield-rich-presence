@@ -1,5 +1,5 @@
 # Battlefield rich presence
-Show your current Battlefield server via Discord rich presence. Others can join the server via a join button using joinme.click and view serverinfo on websites like gametools.
+Show your current Battlefield server via Discord rich presence. Others can join the server via a join button using [joinme.click](https://joinme.click/) and view serverinfo on websites like [gametools](https://gametools.network/).
 
 <img src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" data-canonical-src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" width="206" height="429" />
 
