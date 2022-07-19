@@ -9,11 +9,24 @@ namespace BattlefieldRichPresence.ChangePrensence
     {
         public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
-
+            string mapName;
+            switch (gameInfo.Game)
+            {
+                case Statics.Game.Bf1942:
+                case Statics.Game.Bfvietnam:
+                case Statics.Game.Bf2:
+                case Statics.Game.Bf2142:
+                    mapName = serverInfo.MapName;
+                    break;
+                default:
+                    mapName = serverInfo.MapLabel;
+                    break;
+            }
+            
             RichPresence presence = new RichPresence
             {
                 Details = $"{serverInfo.Name}",
-                State = $"{gameInfo.GameName} - {serverInfo.NumPlayers}/{serverInfo.MaxPlayers} players",
+                State = $"{serverInfo.GetPlayerCountString()} - {mapName}",
                 Timestamps = new Timestamps
                 {
                     Start = startTime
@@ -21,13 +34,13 @@ namespace BattlefieldRichPresence.ChangePrensence
                 Assets = new Assets
                 {
                     LargeImageKey = gameInfo.ShortName,
-                    LargeImageText = gameInfo.GameName,
+                    LargeImageText = gameInfo.FullName,
                     SmallImageKey = "gt",
                     SmallImageText = "Battlefield rich presence"
                 }
             };
             
-            if (Statics.JoinmeClickGames.Contains(gameInfo.ShortName) && serverInfo.JoinLinkWeb != null)
+            if (Statics.JoinmeDotClickGames.Contains(gameInfo.Game) && serverInfo.JoinLinkWeb != null)
             {
                 presence.Buttons = new[]
                 {

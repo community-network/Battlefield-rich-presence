@@ -4,39 +4,63 @@ namespace BattlefieldRichPresence.Resources
 {
     internal class Statics
     {
-        public static readonly string SupportedGames = @"^(?:(?:battlefield(?:(?'bf1'\u2122 1)|(?'bf3' 3\u2122)|(?'bf4' 4)|(?'bfbc2': bad company 2)|(?'bfvietnam' vietnam)))|(?:bf(?:(?'bf2'2)|(?'bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'bf1942'bf1942 \(Ver: \w{3}, \d+ \w{3} \d+ [:0-9]+\)))$";
-        public static readonly Dictionary<string, string> FullGameName = new Dictionary<string, string>
+        public enum Game
         {
-            { "bf1", "Battlefield 1" },
-            { "bf3", "Battlefield 3" },
-            { "bf4", "Battlefield 4" },
-            { "bfvietnam", "Battlefield Vietnam" },
-            { "bfbc2", "Battlefield bad company 2" },
-            { "bf2", "Battlefield 2" },
-            { "bf2142", "Battlefield 2142" },
-            { "bf1942", "Battlefield 1942" },
+            None,
+            Bf1942,
+            Bfvietnam,
+            Bf2,
+            Bf2142,
+            Bfbc2,
+            Bf3,
+            Bf4,
+            Bf1
+        }
+        // Regex group names need to match enum keys, since we need to map the matched group to an enum value 
+        public static readonly string SupportedGamesRegex = @"^(?:(?:battlefield(?:(?'Bf1'\u2122 1)|(?'Bf3' 3\u2122)|(?'Bf4' 4)|(?'Bfbc2': bad company 2)|(?'Bbfvietnam' vietnam)))|(?:bf(?:(?'Bf2'2)|(?'Bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'Bf1942'bf1942 \(Ver: \w{3}, \d+ \w{3} \d+ [:0-9]+\)))$";
+        public static readonly Dictionary<Game, string> ShortGameName = new Dictionary<Game, string>
+        {
+            { Game.Bf1942, "bf1942" },
+            { Game.Bfvietnam, "bfvietnam" },
+            { Game.Bf2, "bf2" },
+            { Game.Bf2142, "bf2142" },
+            { Game.Bfbc2, "bfbc2" },
+            { Game.Bf3, "bf3" },
+            { Game.Bf4, "bf4" },
+            { Game.Bf1, "bf1" },
         };
-        public static readonly List<string> Frostbite3Games = new List<string>
+        public static readonly Dictionary<Game, string> FullGameName = new Dictionary<Game, string>
         {
-            "bf1",
-            "bf4"
+            { Game.Bf1942, "Battlefield 1942" },
+            { Game.Bfvietnam, "Battlefield Vietnam" },
+            { Game.Bf2, "Battlefield 2" },
+            { Game.Bf2142, "Battlefield 2142" },
+            { Game.Bfbc2, "Battlefield: Bad Company 2" },
+            { Game.Bf3, "Battlefield 3" },
+            { Game.Bf4, "Battlefield 4" },
+            { Game.Bf1, "Battlefield 1" },
         };
-        public static readonly List<string> JoinmeClickGames = new List<string>
+        public static readonly List<Game> Frostbite3Games = new List<Game>
         {
-            "bf2",
-            "bfvietnam",
-            "bf1942"
+            Game.Bf4,
+            Game.Bf1
         };
-        public static readonly Dictionary<string, string> GameClientIds = new Dictionary<string, string>
+        public static readonly List<Game> JoinmeDotClickGames = new List<Game>
         {
-            { "bf1", "998710285605019708" },
-            { "bf3", "998710399975305327" },
-            { "bf4", "998710324922437702" },
-            { "bfvietnam", "998710608025366528" },
-            { "bfbc2", "998710536919330927" },
-            { "bf2", "998710361446416424" },
-            { "bf2142", "998710479692234904" },
-            { "bf1942", "998710441595392090" },
+            Game.Bf1942,
+            Game.Bfvietnam,
+            Game.Bf2
+        };
+        public static readonly Dictionary<Game, string> GameClientIds = new Dictionary<Game, string>
+        {
+            { Game.Bf1942, "998710441595392090" },
+            { Game.Bfvietnam, "998710608025366528" },
+            { Game.Bf2, "998710361446416424" },
+            { Game.Bf2142, "998710479692234904" },
+            { Game.Bfbc2, "998710536919330927" },
+            { Game.Bf3, "998710399975305327" },
+            { Game.Bf4, "998710324922437702" },
+            { Game.Bf1, "998710285605019708" },
         };
     }
 }

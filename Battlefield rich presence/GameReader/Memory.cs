@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using BattlefieldRichPresence.Resources;
 
 namespace BattlefieldRichPresence.GameReader
 {
@@ -12,7 +13,7 @@ namespace BattlefieldRichPresence.GameReader
 
         public static bool Initialize()
         {
-            var pArray = Process.GetProcessesByName("bf1");
+            var pArray = Process.GetProcessesByName(Statics.ShortGameName[Statics.Game.Bf1]);
             if (pArray.Length > 0)
             {
                 var process = pArray[0];

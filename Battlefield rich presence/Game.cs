@@ -14,7 +14,7 @@ namespace BattlefieldRichPresence
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
             {
-                Regex rgx = new Regex(Statics.SupportedGames, RegexOptions.IgnoreCase);
+                Regex rgx = new Regex(Statics.SupportedGamesRegex, RegexOptions.IgnoreCase);
                 Match match = rgx.Match(p.MainWindowTitle);
                 if (match.Success)
                 {
@@ -24,11 +24,13 @@ namespace BattlefieldRichPresence
                         Group grp = match.Groups[name];
                         if (!Int32.TryParse(name, out _) && grp.Value != "")
                         {
+                            Statics.Game game = (Statics.Game)Enum.Parse(typeof(Statics.Game), name);
                             return new GameInfo
                             {
+                                Game = game,
                                 IsRunning = true,
-                                ShortName = name,
-                                GameName = Statics.FullGameName[name]
+                                ShortName = Statics.ShortGameName[game],
+                                FullName = Statics.FullGameName[game]
                             };
                         }
                     }
@@ -38,7 +40,7 @@ namespace BattlefieldRichPresence
             {
                 IsRunning = false,
                 ShortName = "",
-                GameName = ""
+                FullName = ""
             };
         }
     }

@@ -25,7 +25,7 @@ namespace BattlefieldRichPresence
         {
             if (gameInfo.IsRunning && !_discordIsRunning)
             {
-                _client = new DiscordRpcClient(Statics.GameClientIds[gameInfo.ShortName]);
+                _client = new DiscordRpcClient(Statics.GameClientIds[gameInfo.Game]);
                 _client.Initialize();
                 _discordIsRunning = true;
                 _startTime = DateTime.UtcNow.AddSeconds(1);
@@ -38,7 +38,7 @@ namespace BattlefieldRichPresence
             } else if (gameInfo.IsRunning && _discordIsRunning && _oldGame != gameInfo.ShortName)
             {
                 _client.Dispose();
-                _client = new DiscordRpcClient(Statics.GameClientIds[gameInfo.ShortName]);
+                _client = new DiscordRpcClient(Statics.GameClientIds[gameInfo.Game]);
                 _client.Initialize();
                 _startTime = DateTime.UtcNow.AddSeconds(1);
             }
@@ -59,7 +59,7 @@ namespace BattlefieldRichPresence
                     Assets = new Assets
                     {
                         LargeImageKey = gameInfo.ShortName,
-                        LargeImageText = gameInfo.GameName,
+                        LargeImageText = gameInfo.FullName,
                         SmallImageKey = "gt",
                         SmallImageText = "Battlefield rich presence"
                     },
@@ -83,7 +83,7 @@ namespace BattlefieldRichPresence
                     Assets = new Assets
                     {
                         LargeImageKey = gameInfo.ShortName,
-                        LargeImageText = gameInfo.GameName,
+                        LargeImageText = gameInfo.FullName,
                         SmallImageKey = "gt",
                         SmallImageText = "Battlefield rich presence"
                     }
@@ -97,7 +97,7 @@ namespace BattlefieldRichPresence
             {
                 try
                 {
-                    if (Statics.Frostbite3Games.Contains(gameInfo.ShortName))
+                    if (Statics.Frostbite3Games.Contains(gameInfo.Game))
                     {
                         Frostbite3.Update(_client, _startTime, gameInfo, serverInfo);
                     } else
@@ -118,7 +118,7 @@ namespace BattlefieldRichPresence
             {
                 GameInfo gameInfo = Game.IsRunning();
                 StartStopDiscord(gameInfo);
-                if (gameInfo.ShortName == "bf1")
+                if (gameInfo.Game == Statics.Game.Bf1)
                 {
                     CurrentServerReader currentServerReader = new CurrentServerReader();
                     if (currentServerReader.HasResults)

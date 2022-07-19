@@ -1,4 +1,5 @@
 ﻿using System;
+using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
 
@@ -10,10 +11,10 @@ namespace BattlefieldRichPresence.ChangePrensence
         {
             string gameId = Api.GetGameId(gameInfo.ShortName, serverInfo.Name);
 
-            string state = $"{gameInfo.GameName} - {serverInfo.NumPlayers} players";
-            if (serverInfo.MaxPlayers > 0)
+            string state = serverInfo.GetPlayerCountString();
+            if (gameInfo.Game == Statics.Game.Bf4)
             {
-                state = $"{gameInfo.GameName} - {serverInfo.NumPlayers}/{serverInfo.MaxPlayers} players";
+                state += $" - {serverInfo.MapLabel}";
             }
 
             //Set the rich presence
@@ -29,7 +30,7 @@ namespace BattlefieldRichPresence.ChangePrensence
                 Assets = new Assets
                 {
                     LargeImageKey = gameInfo.ShortName,
-                    LargeImageText = gameInfo.GameName,
+                    LargeImageText = gameInfo.FullName,
                     SmallImageKey = "gt",
                     SmallImageText = "Battlefield rich presence"
                 },
