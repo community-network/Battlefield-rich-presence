@@ -30,7 +30,8 @@ namespace BattlefieldRichPresence.ChangePrensence
                 {
                     LargeImageKey = gameInfo.ShortName,
                     LargeImageText = gameInfo.GameName,
-                    SmallImageKey = gameInfo.ShortName
+                    SmallImageKey = "gt",
+                    SmallImageText = "Battlefield rich presence"
                 },
                 Buttons = new[] //$"{textBox10.Text}"
                 {

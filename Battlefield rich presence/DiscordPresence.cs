@@ -60,7 +60,8 @@ namespace BattlefieldRichPresence
                     {
                         LargeImageKey = gameInfo.ShortName,
                         LargeImageText = gameInfo.GameName,
-                        SmallImageKey = gameInfo.ShortName
+                        SmallImageKey = "gt",
+                        SmallImageText = "Battlefield rich presence"
                     },
 
                 });
