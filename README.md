@@ -3,15 +3,15 @@ This tool allows you to show others in discord which server you are in inside Ba
 
 <img src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" data-canonical-src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" width="206" height="429" />
 
-### Supported games:
-- Battlefield 1
-- Battlefield 3
-- Battlefield 4
+### Supported games
+- Battlefield 1942
 - Battlefield Vietnam
-- Battlefield bad company 2
 - Battlefield 2
 - Battlefield 2142
-- Battlefield 1942
+- Battlefield: Bad Company 2
+- Battlefield 3
+- Battlefield 4
+- Battlefield 1
 
 download the tool via the release tab in GitHub: https://github.com/community-network/Battlefield-rich-presence/releases/
 
