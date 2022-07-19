@@ -27,5 +27,16 @@ namespace BattlefieldRichPresence.Resources
             "bfvietnam",
             "bf1942"
         };
+        public static readonly Dictionary<string, string> GameClientIds = new Dictionary<string, string>
+        {
+            { "bf1", "998710285605019708" },
+            { "bf3", "998710399975305327" },
+            { "bf4", "998710324922437702" },
+            { "bfvietnam", "998710608025366528" },
+            { "bfbc2", "998710536919330927" },
+            { "bf2", "998710361446416424" },
+            { "bf2142", "998710479692234904" },
+            { "bf1942", "998710441595392090" },
+        };
     }
 }
