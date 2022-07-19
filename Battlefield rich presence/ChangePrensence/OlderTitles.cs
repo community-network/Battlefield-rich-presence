@@ -42,10 +42,21 @@ namespace BattlefieldRichPresence.ChangePrensence
             
             if (Statics.JoinmeDotClickGames.Contains(gameInfo.Game) && serverInfo.JoinLinkWeb != null)
             {
-                presence.Buttons = new[]
+                if (gameInfo.Game == Statics.Game.Bf2)
                 {
-                new Button { Label = "Join", Url = serverInfo.JoinLinkWeb }
-                };
+                    presence.Buttons = new[]
+                    {
+                        new Button { Label = "Join", Url = serverInfo.JoinLinkWeb },
+                        new Button { Label = "View server", Url = $"https://bf2.tv/servers/{serverInfo.Ip}:{serverInfo.Port}" }
+                    };
+                }
+                else
+                {
+                    presence.Buttons = new[]
+                    {
+                        new Button { Label = "Join", Url = serverInfo.JoinLinkWeb }
+                    };
+                }
             }
 
             //Set the rich presence
