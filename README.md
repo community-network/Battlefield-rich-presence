@@ -1,7 +1,7 @@
 # Battlefield 1 rich presence
 This tool allows you to show others in discord which server you are in inside Battlefield 1 with a join button via joinme.click and view serverinfo via gametools server details page.
 
-<img src="https://user-images.githubusercontent.com/22680656/177946537-7889db09-69e0-4314-a5bb-01dde66e1585.png" data-canonical-src="https://user-images.githubusercontent.com/22680656/177946537-7889db09-69e0-4314-a5bb-01dde66e1585.png" width="194" height="461" />
+<img src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" data-canonical-src="https://user-images.githubusercontent.com/22680656/179706999-59d8fc99-3e86-4f8d-b505-754462f079ae.png" width="194" height="461" />
 
 download the tool via the release tab in GitHub: https://github.com/community-network/Battlefield-rich-presence/releases/
 
