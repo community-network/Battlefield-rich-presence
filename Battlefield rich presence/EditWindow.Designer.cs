@@ -39,9 +39,9 @@ namespace BattlefieldRichPresence
             // 
             // PlayerNameBox
             // 
-            this.PlayerNameBox.Location = new System.Drawing.Point(12, 31);
+            this.PlayerNameBox.Location = new System.Drawing.Point(12, 43);
             this.PlayerNameBox.Name = "PlayerNameBox";
-            this.PlayerNameBox.Size = new System.Drawing.Size(281, 20);
+            this.PlayerNameBox.Size = new System.Drawing.Size(281, 22);
             this.PlayerNameBox.TabIndex = 0;
             // 
             // label2
@@ -51,14 +51,13 @@ namespace BattlefieldRichPresence
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(365, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "For support for Battlefield titles older than Battlefield 1, fill in your playern" +
-    "ame.";
+            this.label2.Text = "If you are playing Battlefield titles older than Battlefield 1,\nfill in your in game name (without prefix/clan tag)";
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(299, 29);
+            this.SaveButton.Location = new System.Drawing.Point(299, 42);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(75, 22);
             this.SaveButton.TabIndex = 3;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -68,7 +67,7 @@ namespace BattlefieldRichPresence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 61);
+            this.ClientSize = new System.Drawing.Size(387, 71);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PlayerNameBox);
