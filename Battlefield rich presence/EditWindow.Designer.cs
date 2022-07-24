@@ -53,14 +53,13 @@ namespace BattlefieldRichPresence
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(365, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "For support for Battlefield titles older than Battlefield 1, fill in your playern" +
-    "ame.";
+            this.label2.Text = "If you are playing Battlefield titles older than Battlefield 1,\nfill in your in game name (without prefix/clan tag)";
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(299, 29);
+            this.SaveButton.Location = new System.Drawing.Point(299, 42);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(75, 22);
             this.SaveButton.TabIndex = 3;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
