@@ -40,24 +40,24 @@ namespace BattlefieldRichPresence
             // 
             // PlayerNameBox
             // 
-            this.PlayerNameBox.Location = new System.Drawing.Point(139, 31);
+            this.PlayerNameBox.Location = new System.Drawing.Point(139, 41);
             this.PlayerNameBox.Name = "PlayerNameBox";
             this.PlayerNameBox.Size = new System.Drawing.Size(154, 20);
             this.PlayerNameBox.TabIndex = 0;
-            this.PlayerNameBox.TextChanged += PlayerNameBox_TextChanged;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(365, 13);
+            this.label2.Size = new System.Drawing.Size(271, 26);
             this.label2.TabIndex = 2;
-            this.label2.Text = "If you are playing Battlefield titles older than Battlefield 1,\nfill in your in game name (without prefix/clan tag)";
+            this.label2.Text = "If you are playing Battlefield titles older than Battlefield 1,\nfill in your in g" +
+    "ame name (without prefix/clan tag)";
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(299, 42);
+            this.SaveButton.Location = new System.Drawing.Point(299, 40);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 22);
             this.SaveButton.TabIndex = 3;
@@ -68,7 +68,7 @@ namespace BattlefieldRichPresence
             // GameSelector
             // 
             this.GameSelector.FormattingEnabled = true;
-            this.GameSelector.Location = new System.Drawing.Point(12, 31);
+            this.GameSelector.Location = new System.Drawing.Point(12, 41);
             this.GameSelector.Name = "GameSelector";
             this.GameSelector.Size = new System.Drawing.Size(121, 21);
             this.GameSelector.TabIndex = 4;
@@ -78,7 +78,7 @@ namespace BattlefieldRichPresence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 61);
+            this.ClientSize = new System.Drawing.Size(387, 73);
             this.Controls.Add(this.GameSelector);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
