@@ -35,14 +35,16 @@ namespace BattlefieldRichPresence
             this.PlayerNameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.GameSelector = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // PlayerNameBox
             // 
-            this.PlayerNameBox.Location = new System.Drawing.Point(12, 31);
+            this.PlayerNameBox.Location = new System.Drawing.Point(139, 31);
             this.PlayerNameBox.Name = "PlayerNameBox";
-            this.PlayerNameBox.Size = new System.Drawing.Size(281, 20);
+            this.PlayerNameBox.Size = new System.Drawing.Size(154, 20);
             this.PlayerNameBox.TabIndex = 0;
+            this.PlayerNameBox.TextChanged += PlayerNameBox_TextChanged;
             // 
             // label2
             // 
@@ -64,11 +66,21 @@ namespace BattlefieldRichPresence
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // GameSelector
+            // 
+            this.GameSelector.FormattingEnabled = true;
+            this.GameSelector.Location = new System.Drawing.Point(12, 31);
+            this.GameSelector.Name = "GameSelector";
+            this.GameSelector.Size = new System.Drawing.Size(121, 21);
+            this.GameSelector.TabIndex = 4;
+            this.GameSelector.SelectedIndexChanged += new System.EventHandler(this.GameSelector_SelectedIndexChanged);
+            // 
             // EditWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 61);
+            this.Controls.Add(this.GameSelector);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PlayerNameBox);
@@ -85,5 +97,6 @@ namespace BattlefieldRichPresence
         private TextBox PlayerNameBox;
         private Label label2;
         private Button SaveButton;
+        private ComboBox GameSelector;
     }
 }

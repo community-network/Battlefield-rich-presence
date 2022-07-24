@@ -19,7 +19,7 @@ namespace BattlefieldRichPresence
                 Text = "Battlefield rich presence",
                 Icon = Properties.Resources.TrayIcon,
                 ContextMenu = new ContextMenu(new[] {
-                new MenuItem($"Player: {_config.PlayerName}", Void),
+                //new MenuItem($"Player: {_config.PlayerName}", Void),
                 new MenuItem("Next update in ...", Void),
                 new MenuItem("Edit settings", Edit),
                 new MenuItem("Exit", Exit),
@@ -27,7 +27,7 @@ namespace BattlefieldRichPresence
                 Visible = true
             };
             _trayIcon.ContextMenu.MenuItems[0].Enabled = false;
-            _trayIcon.ContextMenu.MenuItems[1].Enabled = false;
+            //_trayIcon.ContextMenu.MenuItems[1].Enabled = false;
 
             DiscordPresence discordPresence = new DiscordPresence();
             // run on startup instead of 15 seconds later
@@ -45,7 +45,7 @@ namespace BattlefieldRichPresence
 
         void UpdateTray(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _trayIcon.ContextMenu.MenuItems[1].Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft)/1000}";
+            _trayIcon.ContextMenu.MenuItems[0].Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft)/1000}";
         }
 
         void Void(object sender, EventArgs e) { }
@@ -56,7 +56,7 @@ namespace BattlefieldRichPresence
             {
                 DialogResult result = editWindow.ShowDialog();
                 _config.Refresh();
-                _trayIcon.ContextMenu.MenuItems[0].Text = $"Player: {_config.PlayerName}";
+                //_trayIcon.ContextMenu.MenuItems[0].Text = $"Player: {_config.PlayerName}";
             }
         }
 

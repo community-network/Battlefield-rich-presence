@@ -26,12 +26,96 @@ namespace BattlefieldRichPresence.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string playerName {
+        public string bf1942 {
             get {
-                return ((string)(this["playerName"]));
+                return ((string)(this["bf1942"]));
             }
             set {
-                this["playerName"] = value;
+                this["bf1942"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bfvietnam {
+            get {
+                return ((string)(this["bfvietnam"]));
+            }
+            set {
+                this["bfvietnam"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bf2 {
+            get {
+                return ((string)(this["bf2"]));
+            }
+            set {
+                this["bf2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bf2142 {
+            get {
+                return ((string)(this["bf2142"]));
+            }
+            set {
+                this["bf2142"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bf3 {
+            get {
+                return ((string)(this["bf3"]));
+            }
+            set {
+                this["bf3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bf4 {
+            get {
+                return ((string)(this["bf4"]));
+            }
+            set {
+                this["bf4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bfh {
+            get {
+                return ((string)(this["bfh"]));
+            }
+            set {
+                this["bfh"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bfbc2 {
+            get {
+                return ((string)(this["bfbc2"]));
+            }
+            set {
+                this["bfbc2"] = value;
             }
         }
     }

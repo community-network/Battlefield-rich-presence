@@ -144,7 +144,7 @@ namespace BattlefieldRichPresence
                     }
                 }
             }
-            else if (gameInfo.IsRunning && _config.PlayerName != "")
+            else if (gameInfo.IsRunning && (string)_config.PlayerNames[gameInfo.ShortName] != null)
             {
                 try
                 {

@@ -250,6 +250,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Structs\GameInfo.cs" />
+    <Compile Include="Structs\GamesPlayerName.cs" />
     <Compile Include="Structs\PlayerList.cs" />
     <Compile Include="Structs\ServerInfo.cs" />
     <Compile Include="TimerPlus.cs">
