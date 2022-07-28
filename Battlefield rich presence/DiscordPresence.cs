@@ -148,7 +148,8 @@ namespace BattlefieldRichPresence
             {
                 try
                 {
-                    ServerInfo serverInfo = Api.OldTitleServerInfo(_config, gameInfo.ShortName);
+                    var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName);
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)
