@@ -21,7 +21,6 @@ namespace BattlefieldRichPresence
             {
                 Bf1942 = Settings.Default.bf1942,
                 Bfvietnam = Settings.Default.bfvietnam,
-                Bf2 = Settings.Default.bf2,
                 Bf2142 = Settings.Default.bf2142,
                 Bfbc2 = Settings.Default.bfbc2,
                 Bf3 = Settings.Default.bf3,
@@ -34,7 +33,6 @@ namespace BattlefieldRichPresence
         {
             Settings.Default.bf1942 = PlayerNames.Bf1942;
             Settings.Default.bfvietnam = PlayerNames.Bfvietnam;
-            Settings.Default.bf2 = PlayerNames.Bf2;
             Settings.Default.bf2142 = PlayerNames.Bf2142;
             Settings.Default.bfbc2 = PlayerNames.Bfbc2;
             Settings.Default.bf3 = PlayerNames.Bf3;

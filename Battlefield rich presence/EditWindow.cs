@@ -26,7 +26,6 @@ namespace BattlefieldRichPresence
             {
                 Bf1942 = PlayerNames.Bf1942,
                 Bfvietnam = PlayerNames.Bfvietnam,
-                Bf2 = PlayerNames.Bf2,
                 Bf2142 = PlayerNames.Bf2142,
                 Bfbc2 = PlayerNames.Bfbc2,
                 Bf3 = PlayerNames.Bf3,
