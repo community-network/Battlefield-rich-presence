@@ -36,6 +36,7 @@ namespace BattlefieldRichPresence
             this.label2 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.GameSelector = new System.Windows.Forms.ComboBox();
+            this.ChangeAllButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerNameBox
@@ -44,6 +45,7 @@ namespace BattlefieldRichPresence
             this.PlayerNameBox.Name = "PlayerNameBox";
             this.PlayerNameBox.Size = new System.Drawing.Size(154, 20);
             this.PlayerNameBox.TabIndex = 0;
+            this.PlayerNameBox.TextChanged += new System.EventHandler(this.PlayerNameBox_TextChanged);
             // 
             // label2
             // 
@@ -74,11 +76,22 @@ namespace BattlefieldRichPresence
             this.GameSelector.TabIndex = 4;
             this.GameSelector.SelectedIndexChanged += new System.EventHandler(this.GameSelector_SelectedIndexChanged);
             // 
+            // ChangeAllButton
+            // 
+            this.ChangeAllButton.Location = new System.Drawing.Point(379, 40);
+            this.ChangeAllButton.Name = "ChangeAllButton";
+            this.ChangeAllButton.Size = new System.Drawing.Size(75, 22);
+            this.ChangeAllButton.TabIndex = 5;
+            this.ChangeAllButton.Text = "Change all";
+            this.ChangeAllButton.UseVisualStyleBackColor = true;
+            this.ChangeAllButton.Click += new System.EventHandler(this.ChangeAllButton_Click);
+            // 
             // EditWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 73);
+            this.ClientSize = new System.Drawing.Size(466, 73);
+            this.Controls.Add(this.ChangeAllButton);
             this.Controls.Add(this.GameSelector);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
@@ -97,5 +110,6 @@ namespace BattlefieldRichPresence
         private Label label2;
         private Button SaveButton;
         private ComboBox GameSelector;
+        private Button ChangeAllButton;
     }
 }

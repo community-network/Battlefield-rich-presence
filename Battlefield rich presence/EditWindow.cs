@@ -40,7 +40,7 @@ namespace BattlefieldRichPresence
             bool hasChanges = false;
             foreach (Statics.Game game in Statics.BflistDotIoGames)
             {
-                if (_current[game.ToString()] != _config.PlayerNames[game.ToString()])
+                if (!string.Equals(_current[game.ToString()], _config.PlayerNames[game.ToString()]))
                 {
                     hasChanges = true;
                 }
@@ -57,7 +57,7 @@ namespace BattlefieldRichPresence
 
         private void Save()
         {
-            _config.PlayerNames = _current;
+            _config.PlayerNames = Clone(_current);
             _config.Update();
         }
 
@@ -78,6 +78,15 @@ namespace BattlefieldRichPresence
         private void PlayerNameBox_TextChanged(object sender, EventArgs e)
         {
             _current[GameSelector.SelectedItem.ToString()] = PlayerNameBox.Text;
+        }
+
+        private void ChangeAllButton_Click(object sender, EventArgs e)
+        {
+            foreach (Statics.Game game in Statics.BflistDotIoGames)
+            {
+                _current[game.ToString()] = PlayerNameBox.Text;
+                Save();
+            }
         }
     }
 }
