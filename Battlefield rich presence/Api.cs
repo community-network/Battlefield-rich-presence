@@ -21,10 +21,11 @@ namespace BattlefieldRichPresence
             return jsonSerializer.Deserialize<ServerInfo>(data);
         }
 
-        public static ServerInfo OldTitleServerInfo(Config config, string gameName)
+        public static ServerInfo OldTitleServerInfo(string unescapedPlayerName, string gameName)
         {
             WebClient webClient = new WebClient();
-            string data = webClient.DownloadString(new Uri($"https://api.bflist.io/{gameName}/v1/players/{Uri.EscapeDataString((string)config.PlayerNames[gameName])}/server"));
+            string playerName = Uri.EscapeDataString(unescapedPlayerName);
+            string data = webClient.DownloadString(new Uri($"https://api.bflist.io/{gameName}/v1/players/{playerName}/server"));
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             return jsonSerializer.Deserialize<ServerInfo>(data);
         }

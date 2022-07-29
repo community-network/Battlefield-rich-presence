@@ -8,9 +8,6 @@
     <Setting Name="bfvietnam" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="bf2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="bf2142" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

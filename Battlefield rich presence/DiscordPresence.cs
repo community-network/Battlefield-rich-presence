@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Threading;
 using BattlefieldRichPresence.ChangePrensence;
 using BattlefieldRichPresence.GameReader;
 using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
+using GameDataReader;
 
 namespace BattlefieldRichPresence
 {
@@ -144,11 +144,25 @@ namespace BattlefieldRichPresence
                     }
                 }
             }
+            else if (gameInfo.IsRunning && gameInfo.Game == Statics.Game.Bf2)
+            {
+                try
+                {
+                    var playerName = GameDataReaders.Bf2.ReadActivePlayer().OnlineName;
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName);
+                    UpdatePresence(gameInfo, serverInfo);
+                }
+                catch (Exception)
+                {
+                    UpdatePresenceInMenu(gameInfo);
+                }
+            }
             else if (gameInfo.IsRunning && (string)_config.PlayerNames[gameInfo.ShortName] != null)
             {
                 try
                 {
-                    ServerInfo serverInfo = Api.OldTitleServerInfo(_config, gameInfo.ShortName);
+                    var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName);
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)

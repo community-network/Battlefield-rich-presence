@@ -47,7 +47,6 @@ namespace BattlefieldRichPresence.Resources
         {
             Game.Bf1942,
             Game.Bfvietnam,
-            Game.Bf2,
             Game.Bf2142,
             Game.Bfbc2,
             Game.Bf3,

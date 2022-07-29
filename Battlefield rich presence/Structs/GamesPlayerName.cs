@@ -7,7 +7,6 @@ namespace BattlefieldRichPresence.Structs
     {
         public string Bf1942 { get; set; }
         public string Bfvietnam { get; set; }
-        public string Bf2 { get; set; }
         public string Bf2142 { get; set; }
         public string Bfbc2 { get; set; }
         public string Bf3 { get; set; }
