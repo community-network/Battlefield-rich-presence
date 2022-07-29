@@ -65,12 +65,14 @@ namespace BattlefieldRichPresence
             Save();
             SaveButton.Text = "Saved!";
             await Task.Delay(1000);
-            SaveButton.Text = "Save";
+            SaveButton.Text = $"Save for {GameSelector.SelectedItem}";
         }
 
         private void GameSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string playerName = (string)_current[GameSelector.SelectedItem.ToString()];
+            var gameName = GameSelector.SelectedItem.ToString();
+            SaveButton.Text = $"Save for {GameSelector.SelectedItem}";
+            string playerName = (string)_current[gameName];
             PlayerNameBox.Text = playerName ?? "";
         }
 
