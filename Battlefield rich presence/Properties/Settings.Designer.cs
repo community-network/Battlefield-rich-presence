@@ -106,5 +106,17 @@ namespace BattlefieldRichPresence.Properties {
                 this["bfbc2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string bf5 {
+            get {
+                return ((string)(this["bf5"]));
+            }
+            set {
+                this["bf5"] = value;
+            }
+        }
     }
 }

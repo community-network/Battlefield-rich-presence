@@ -44,6 +44,10 @@ namespace BattlefieldRichPresence
             webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
             string postData = json_serializer.Serialize(new { data = jwtData });
             string data = webClient.UploadString(new Uri("https://api.gametools.network/currentserver/bf5"), "POST", postData);
+            if (data == "{}")
+            {
+                throw new Exception("not in a server");
+            }
             return json_serializer.Deserialize<ServerInfo>(data);
         }
     }

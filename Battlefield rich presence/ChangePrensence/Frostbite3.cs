@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
 
@@ -8,7 +9,12 @@ namespace BattlefieldRichPresence.ChangePrensence
     {
         public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
-            ServerInfo extraInfo = Api.GetServerInfo(gameInfo.ShortName, serverInfo.Name);
+            ServerInfo extraInfo = serverInfo;
+
+            if (gameInfo.Game != Resources.Statics.Game.Bf5)
+            {
+                extraInfo = Api.GetServerInfo(gameInfo.ShortName, serverInfo.Name);
+            }
 
             serverInfo.MaxPlayers = extraInfo.MaxPlayers;
             string state = serverInfo.GetPlayerCountString();
@@ -16,7 +22,7 @@ namespace BattlefieldRichPresence.ChangePrensence
 
             //Set the rich presence
             //Call this as many times as you want and anywhere in your code.
-            client.SetPresence(new RichPresence
+            RichPresence presence = new RichPresence
             {
                 Details = $"{serverInfo.Name}",
                 State = state,
@@ -26,17 +32,29 @@ namespace BattlefieldRichPresence.ChangePrensence
                 },
                 Assets = new Assets
                 {
-                    LargeImageKey = gameInfo.ShortName,
+                    LargeImageKey = gameInfo.ShortName.ToLower(),
                     LargeImageText = gameInfo.FullName,
                     SmallImageKey = "gt",
                     SmallImageText = "Battlefield rich presence"
-                },
-                Buttons = new[] //$"{textBox10.Text}"
-                {
-                        new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName}/{extraInfo.GameId}" },
-                        new Button { Label = "View server", Url = $"https://gametools.network/servers/{gameInfo.ShortName}/gameid/{extraInfo.GameId}/pc" }
                 }
-            });
+            };
+
+            List<Button> buttons = new List<Button>();
+
+            String api_name = gameInfo.ShortName.ToLower();
+
+            if (gameInfo.Game != Resources.Statics.Game.Bf5)
+            {
+                buttons.Add(new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName.ToLower()}/{extraInfo.GameId}" });
+            } else
+            {
+                api_name = "bfv";
+            }
+
+            buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{api_name}/gameid/{extraInfo.GameId}/pc" });
+
+            presence.Buttons = buttons.ToArray();
+            client.SetPresence(presence);
         }
     }
 }

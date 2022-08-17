@@ -34,7 +34,7 @@ namespace BattlefieldRichPresence.ChangePrensence
                 },
                 Assets = new Assets
                 {
-                    LargeImageKey = gameInfo.ShortName,
+                    LargeImageKey = gameInfo.ShortName.ToLower(),
                     LargeImageText = gameInfo.FullName,
                     SmallImageKey = "gt",
                     SmallImageText = "Battlefield rich presence"

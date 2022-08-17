@@ -15,7 +15,7 @@ namespace BattlefieldRichPresence
             InitializeComponent();
             _config = new Config();
             _current = Clone(_config.PlayerNames);
-            GameSelector.DataSource = Statics.BflistDotIoGames;
+            GameSelector.DataSource = Statics.nameChangeUiGames;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             FormClosing += EditFormClosing;
         }
@@ -31,13 +31,14 @@ namespace BattlefieldRichPresence
                 Bf3 = PlayerNames.Bf3,
                 Bf4 = PlayerNames.Bf4,
                 Bfh = PlayerNames.Bfh,
+                Bf5 = PlayerNames.Bf5
             };
         }
 
         private void EditFormClosing(object sender, FormClosingEventArgs e)
         {
             bool hasChanges = false;
-            foreach (Statics.Game game in Statics.BflistDotIoGames)
+            foreach (Statics.Game game in Statics.nameChangeUiGames)
             {
                 if (!string.Equals(_current[game.ToString()], _config.PlayerNames[game.ToString()]))
                 {
@@ -83,7 +84,7 @@ namespace BattlefieldRichPresence
 
         private void ChangeAllButton_Click(object sender, EventArgs e)
         {
-            foreach (Statics.Game game in Statics.BflistDotIoGames)
+            foreach (Statics.Game game in Statics.nameChangeUiGames)
             {
                 _current[game.ToString()] = PlayerNameBox.Text;
                 Save();

@@ -15,21 +15,23 @@ namespace BattlefieldRichPresence.Resources
             Bf3,
             Bf4,
             Bfh,
-            Bf1
+            Bf1,
+            Bf5
         }
         // Regex group names need to match enum keys, since we need to map the matched group to an enum value 
-        public static readonly string SupportedGamesRegex = @"^(?:(?:battlefield(?:(?'Bf1'\u2122 1)|(?'Bf3' 3\u2122)|(?'Bf4' 4)|(?'Bfh' Hardline)|(?'Bfbc2': bad company 2)|(?'Bfvietnam' vietnam)))|(?:bf(?:(?'Bf2'2)|(?'Bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'Bf1942'bf1942 \(Ver: \w{3}, \d+ \w{3} \d+ [:0-9]+\)))$";
+        public static readonly string SupportedGamesRegex = @"^(?:(?:battlefield(?:(?'Bf1'\u2122 1)|(?'Bf5'\u2122 V)|(?'Bf3' 3\u2122)|(?'Bf4' 4)|(?'Bfh' Hardline)|(?'Bfbc2': bad company 2)|(?'Bfvietnam' vietnam)))|(?:bf(?:(?'Bf2'2)|(?'Bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'Bf1942'bf1942 \(Ver: \w{3}, \d+ \w{3} \d+ [:0-9]+\)))$";
         public static readonly Dictionary<Game, string> ShortGameName = new Dictionary<Game, string>
         {
-            { Game.Bf1942, "bf1942" },
-            { Game.Bfvietnam, "bfvietnam" },
-            { Game.Bf2, "bf2" },
-            { Game.Bf2142, "bf2142" },
-            { Game.Bfbc2, "bfbc2" },
-            { Game.Bf3, "bf3" },
-            { Game.Bf4, "bf4" },
-            { Game.Bfh, "bfh" },
-            { Game.Bf1, "bf1" },
+            { Game.Bf1942, "Bf1942" },
+            { Game.Bfvietnam, "Bfvietnam" },
+            { Game.Bf2, "Bf2" },
+            { Game.Bf2142, "Bf2142" },
+            { Game.Bfbc2, "Bfbc2" },
+            { Game.Bf3, "Bf3" },
+            { Game.Bf4, "Bf4" },
+            { Game.Bfh, "Bfh" },
+            { Game.Bf1, "Bf1" },
+            { Game.Bf5, "Bf5" }
         };
         public static readonly Dictionary<Game, string> FullGameName = new Dictionary<Game, string>
         {
@@ -42,8 +44,9 @@ namespace BattlefieldRichPresence.Resources
             { Game.Bf4, "Battlefield 4" },
             { Game.Bfh, "Battlefield Hardline" },
             { Game.Bf1, "Battlefield 1" },
+            { Game.Bf5, "Battlefield V" }
         };
-        public static readonly List<Game> BflistDotIoGames = new List<Game>
+        public static readonly List<Game> nameChangeUiGames = new List<Game>
         {
             Game.Bf1942,
             Game.Bfvietnam,
@@ -51,12 +54,14 @@ namespace BattlefieldRichPresence.Resources
             Game.Bfbc2,
             Game.Bf3,
             Game.Bf4,
-            Game.Bfh
+            Game.Bfh,
+            Game.Bf5
         };
         public static readonly List<Game> Frostbite3Games = new List<Game>
         {
             Game.Bf4,
-            Game.Bf1
+            Game.Bf1,
+            Game.Bf5
         };
         public static readonly List<Game> JoinmeDotClickGames = new List<Game>
         {
@@ -87,6 +92,7 @@ namespace BattlefieldRichPresence.Resources
             { Game.Bf4, "998710324922437702" },
             { Game.Bfh, "999057759876161587" },
             { Game.Bf1, "998710285605019708" },
+            { Game.Bf5, "1009379254926053458" }
         };
     }
 }

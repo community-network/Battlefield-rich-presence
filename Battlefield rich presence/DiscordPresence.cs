@@ -59,7 +59,7 @@ namespace BattlefieldRichPresence
                     },
                     Assets = new Assets
                     {
-                        LargeImageKey = gameInfo.ShortName,
+                        LargeImageKey = gameInfo.ShortName.ToLower(),
                         LargeImageText = gameInfo.FullName,
                         SmallImageKey = "gt",
                         SmallImageText = "Battlefield rich presence"
@@ -83,7 +83,7 @@ namespace BattlefieldRichPresence
                     },
                     Assets = new Assets
                     {
-                        LargeImageKey = gameInfo.ShortName,
+                        LargeImageKey = gameInfo.ShortName.ToLower(),
                         LargeImageText = gameInfo.FullName,
                         SmallImageKey = "gt",
                         SmallImageText = "Battlefield rich presence"
@@ -144,12 +144,25 @@ namespace BattlefieldRichPresence
                     }
                 }
             }
+            else if (gameInfo.Game == Statics.Game.Bf5)
+            {
+                try
+                {
+                    var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
+                    ServerInfo serverInfo = Api.getBf5CurrentServer(playerName);
+                    UpdatePresence(gameInfo, serverInfo);
+                }
+                catch (Exception)
+                {
+                    UpdatePresenceInMenu(gameInfo);
+                }
+            }
             else if (gameInfo.IsRunning && gameInfo.Game == Statics.Game.Bf2)
             {
                 try
                 {
                     var playerName = GameDataReaders.Bf2.ReadActivePlayer().OnlineName;
-                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName);
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName.ToLower());
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)
@@ -162,7 +175,7 @@ namespace BattlefieldRichPresence
                 try
                 {
                     var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
-                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName);
+                    ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName.ToLower());
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)
