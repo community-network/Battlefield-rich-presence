@@ -27,4 +27,4 @@ To exit the tool, just right click the icon and select the "Exit" option.
 
 For all games except Battlefield 1 and 2, you need to configure your in game name. Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
 
-![image](https://user-images.githubusercontent.com/22680656/179611678-e874923d-36b3-4d5c-a807-61d13a6686f7.png)
+![image](https://user-images.githubusercontent.com/22680656/185106440-bc416f4a-ed5d-4404-a9b4-c48f4c042cc3.png)
