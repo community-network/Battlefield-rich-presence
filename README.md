@@ -13,6 +13,7 @@ Show your current Battlefield server via Discord rich presence. Others can join 
 - Battlefield 4
 - Battlefield Hardline
 - Battlefield 1
+- Battlefield 5
 
 Download the tool via the release tab on GitHub: https://github.com/community-network/Battlefield-rich-presence/releases/
 
@@ -24,6 +25,6 @@ To exit the tool, just right click the icon and select the "Exit" option.
 
 ![image](https://user-images.githubusercontent.com/22680656/179611255-31dac7fe-962a-4796-837a-bbdc6830a2fc.png)
 
-For all games except Battlefield 1, you need to configure your in game name. Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
+For all games except Battlefield 1 and 2, you need to configure your in game name. Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
 
 ![image](https://user-images.githubusercontent.com/22680656/179611678-e874923d-36b3-4d5c-a807-61d13a6686f7.png)
