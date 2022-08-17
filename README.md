@@ -23,7 +23,7 @@ You only have to launch the exe and it will run in the background with an icon i
 
 To exit the tool, just right click the icon and select the "Exit" option.
 
-![image](https://user-images.githubusercontent.com/22680656/179611255-31dac7fe-962a-4796-837a-bbdc6830a2fc.png)
+![image](https://user-images.githubusercontent.com/22680656/185106733-e8719c9f-822c-4f9b-aee2-919a2f0d0008.png)
 
 For all games except Battlefield 1 and 2, you need to configure your in game name. Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
 
