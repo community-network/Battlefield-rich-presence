@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3.0.2
         
     - name: Find and Replace
-      run: ((Get-Content -path "Battlefield rich presence\\Jwt.cs" -Raw) -replace 'SUPERSECRETPLACEHOLDER','${{ secrets.JwtToken }}') | Set-Content -Path seeder-app-C-sharp\Jwt.cs
+      run: ((Get-Content -path "Battlefield rich presence\\Jwt.cs" -Raw) -replace 'SUPERSECRETPLACEHOLDER','${{ secrets.JwtToken }}') | Set-Content -Path "Battlefield rich presence\Jwt.cs"
         
     - name: setup MS-build
       uses: microsoft/setup-msbuild@v1.1
