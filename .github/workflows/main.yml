@@ -7,6 +7,9 @@ jobs:
   build:
 
     runs-on: windows-2019
+    env:
+      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com
+      SLN_PATH: Battlefield rich presence.sln
 
     steps:
     - uses: actions/checkout@v3.0.2
@@ -24,8 +27,8 @@ jobs:
       run: nuget restore "Battlefield rich presence.sln"
     
     - name: Build
-      run: '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\devenv.exe" "Battlefield rich presence.sln" /Rebuild "Release|x64"'
-                    #run: msbuild "Battlefield rich presence.sln" /p:Configuration=Release /p:Platform=x64
+      run: |
+        "%MSBUILD_PATH%" "%SLN_PATH%" /build "Release|x64"
     - name: release
       uses: zendesk/action-create-release@v1
       id: create_release
