@@ -5,22 +5,21 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battlefield rich presence", "Battlefield rich presence\Battlefield rich presence.csproj", "{C4714C39-39F4-47F9-9874-74A6CB2F59E6}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Battlefield-rich-presence-setup", "Battlefield-rich-presence-setup\Battlefield-rich-presence-setup.vdproj", "{B5A1A568-AD26-4987-80ED-3B7270BD94D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
-		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|x64.ActiveCfg = Release|x64
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|x64.Build.0 = Release|x64
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|x64.ActiveCfg = Debug|x64
+		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Debug|x64.Build.0 = Debug|x64
 		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Release|x64.ActiveCfg = Release|x64
 		{C4714C39-39F4-47F9-9874-74A6CB2F59E6}.Release|x64.Build.0 = Release|x64
+		{B5A1A568-AD26-4987-80ED-3B7270BD94D5}.Debug|x64.ActiveCfg = Debug
+		{B5A1A568-AD26-4987-80ED-3B7270BD94D5}.Release|x64.ActiveCfg = Release
+		{B5A1A568-AD26-4987-80ED-3B7270BD94D5}.Release|x64.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
