@@ -14,6 +14,7 @@ namespace BattlefieldRichPresence
         {
             InitializeComponent();
             _config = new Config();
+            GatherServerInfoCheckBox.Checked = _config.GatherServerInfo;
             _current = Clone(_config.PlayerNames);
             GameSelector.DataSource = Statics.nameChangeUiGames;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -89,6 +90,11 @@ namespace BattlefieldRichPresence
                 _current[game.ToString()] = PlayerNameBox.Text;
                 Save();
             }
+        }
+
+        private void GatherServerInfoCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.GatherServerInfo = GatherServerInfoCheckBox.Checked;
         }
     }
 }

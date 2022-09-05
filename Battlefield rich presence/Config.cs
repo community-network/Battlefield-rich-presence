@@ -1,22 +1,30 @@
 ﻿using BattlefieldRichPresence.Properties;
-using BattlefieldRichPresence.Resources;
 using System;
-using System.Collections.Generic;
-using System.Web.Script.Serialization;
 
 namespace BattlefieldRichPresence
 {
     internal class Config
     {
         public Structs.GamesPlayerName PlayerNames;
+        public bool GatherServerInfo;
+        public Guid Guid;
 
         public Config()
         {
+            if (Settings.Default.Guid == new Guid())
+            {
+                Guid = Guid.NewGuid();
+                Settings.Default.Guid = Guid;
+                Settings.Default.Save();
+            }
+
             Refresh();
         }
 
         public void Refresh()
         {
+            Guid = Settings.Default.Guid;
+            GatherServerInfo = Settings.Default.GatherServerInfo;
             PlayerNames = new Structs.GamesPlayerName()
             {
                 Bf1942 = Settings.Default.bf1942,
@@ -32,6 +40,9 @@ namespace BattlefieldRichPresence
 
         public void Update()
         {
+            Settings.Default.GatherServerInfo = GatherServerInfo;
+            Settings.Default.Guid = Guid;
+
             Settings.Default.bf1942 = PlayerNames.Bf1942;
             Settings.Default.bfvietnam = PlayerNames.Bfvietnam;
             Settings.Default.bf2142 = PlayerNames.Bf2142;

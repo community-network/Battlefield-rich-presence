@@ -137,6 +137,19 @@ namespace BattlefieldRichPresence
                             JoinLinkWeb = ""
                         };
                         UpdatePresence(gameInfo, serverInfo);
+
+                        // send info to gametools about server to show in detailed serverinfo page when enabled (privacy reasons)
+                        if (_config.GatherServerInfo)
+                        {
+                            try
+                            {
+                                Api.PostPlayerlist(currentServerReader, this._config.Guid);
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
                     }
                     else
                     {
