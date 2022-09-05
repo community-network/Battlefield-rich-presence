@@ -24,7 +24,8 @@ jobs:
       run: nuget restore "Battlefield rich presence.sln"
     
     - name: Build
-      run: msbuild "Battlefield rich presence.sln" /p:Configuration=Release /p:Platform=x64
+      run: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe "Battlefield rich presence.sln" /Rebuild "Release|x64" /Project "Battlefield-rich-presence-setup/Battlefield-rich-presence-setup.vdproj
+                    #run: msbuild "Battlefield rich presence.sln" /p:Configuration=Release /p:Platform=x64
     - name: release
       uses: zendesk/action-create-release@v1
       id: create_release
@@ -42,6 +43,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "Battlefield rich presence\\bin\\x64\\Release\\Battlefield rich presence.exe"
-        asset_name: "Battlefield rich presence.exe"
-        asset_content_type: application/exe
+        asset_path: "Battlefield-rich-presence-setup\\Release\\Battlefield-rich-presence-setup.msi"
+        asset_name: "Battlefield-rich-presence-setup.msi"
+        asset_content_type: application/x-msi
