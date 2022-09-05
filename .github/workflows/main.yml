@@ -28,7 +28,7 @@ jobs:
     
     - name: Build
       run: |
-        "%MSBUILD_PATH%" "%SLN_PATH%" /build "Release|x64"
+        "%MSBUILD_PATH%" "%SLN_PATH%" /build release
     - name: release
       uses: zendesk/action-create-release@v1
       id: create_release
