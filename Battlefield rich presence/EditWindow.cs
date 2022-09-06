@@ -16,7 +16,7 @@ namespace BattlefieldRichPresence
             _config = new Config();
             GatherServerInfoCheckBox.Checked = _config.GatherServerInfo;
             _current = Clone(_config.PlayerNames);
-            GameSelector.DataSource = Statics.nameChangeUiGames;
+            GameSelector.DataSource = Statics.NameChangeUiGames;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             FormClosing += EditFormClosing;
         }
@@ -39,7 +39,7 @@ namespace BattlefieldRichPresence
         private void EditFormClosing(object sender, FormClosingEventArgs e)
         {
             bool hasChanges = false;
-            foreach (Statics.Game game in Statics.nameChangeUiGames)
+            foreach (Statics.Game game in Statics.NameChangeUiGames)
             {
                 if (!string.Equals(_current[game.ToString()], _config.PlayerNames[game.ToString()]))
                 {
@@ -85,7 +85,7 @@ namespace BattlefieldRichPresence
 
         private void ChangeAllButton_Click(object sender, EventArgs e)
         {
-            foreach (Statics.Game game in Statics.nameChangeUiGames)
+            foreach (Statics.Game game in Statics.NameChangeUiGames)
             {
                 _current[game.ToString()] = PlayerNameBox.Text;
                 Save();

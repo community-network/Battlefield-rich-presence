@@ -46,16 +46,21 @@ namespace BattlefieldRichPresence.Resources
             { Game.Bf1, "Battlefield 1" },
             { Game.Bf5, "Battlefield V" }
         };
-        public static readonly List<Game> nameChangeUiGames = new List<Game>
+        public static readonly List<Game> NameChangeUiGames = new List<Game>
         {
-            Game.Bf1942,
-            Game.Bfvietnam,
-            Game.Bf2142,
             Game.Bfbc2,
             Game.Bf3,
             Game.Bf4,
             Game.Bfh,
             Game.Bf5
+        };
+
+        public static readonly List<Game> GameDataReaderGames = new List<Game>
+        {
+            Game.Bf1942,
+            Game.Bfvietnam,
+            Game.Bf2,
+            Game.Bf2142
         };
         public static readonly List<Game> Frostbite3Games = new List<Game>
         {
