@@ -75,7 +75,7 @@ namespace BattlefieldRichPresence
         {
             using (var editWindow = new EditWindow())
             {
-                DialogResult result = editWindow.ShowDialog();
+                editWindow.ShowDialog();
                 _config.Refresh();
                 UpdateTrayItems();
             }

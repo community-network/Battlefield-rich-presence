@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using System;
-
-namespace BattlefieldRichPresence.Structs
+﻿namespace BattlefieldRichPresence.Structs
 {
     internal class GamesPlayerName
     {

@@ -21,18 +21,18 @@ namespace BattlefieldRichPresence
             FormClosing += EditFormClosing;
         }
 
-        private Structs.GamesPlayerName Clone(Structs.GamesPlayerName PlayerNames)
+        private Structs.GamesPlayerName Clone(Structs.GamesPlayerName playerNames)
         {
             return new Structs.GamesPlayerName()
             {
-                Bf1942 = PlayerNames.Bf1942,
-                Bfvietnam = PlayerNames.Bfvietnam,
-                Bf2142 = PlayerNames.Bf2142,
-                Bfbc2 = PlayerNames.Bfbc2,
-                Bf3 = PlayerNames.Bf3,
-                Bf4 = PlayerNames.Bf4,
-                Bfh = PlayerNames.Bfh,
-                Bf5 = PlayerNames.Bf5
+                Bf1942 = playerNames.Bf1942,
+                Bfvietnam = playerNames.Bfvietnam,
+                Bf2142 = playerNames.Bf2142,
+                Bfbc2 = playerNames.Bfbc2,
+                Bf3 = playerNames.Bf3,
+                Bf4 = playerNames.Bf4,
+                Bfh = playerNames.Bfh,
+                Bf5 = playerNames.Bf5
             };
         }
 
@@ -41,7 +41,7 @@ namespace BattlefieldRichPresence
             bool hasChanges = false;
             foreach (Statics.Game game in Statics.NameChangeUiGames)
             {
-                if (!string.Equals(_current[game.ToString()], _config.PlayerNames[game.ToString()]))
+                if (!Equals(_current[game.ToString()], _config.PlayerNames[game.ToString()]))
                 {
                     hasChanges = true;
                 }

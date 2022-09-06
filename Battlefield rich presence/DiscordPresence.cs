@@ -162,7 +162,7 @@ namespace BattlefieldRichPresence
                 try
                 {
                     var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
-                    ServerInfo serverInfo = Api.getBf5CurrentServer(playerName);
+                    ServerInfo serverInfo = Api.GetBf5CurrentServer(playerName);
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)
