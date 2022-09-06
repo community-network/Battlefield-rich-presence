@@ -150,7 +150,7 @@ namespace BattlefieldRichPresence
             this.GatherServerInfoCheckBox.Name = "GatherServerInfoCheckBox";
             this.GatherServerInfoCheckBox.Size = new System.Drawing.Size(354, 17);
             this.GatherServerInfoCheckBox.TabIndex = 9;
-            this.GatherServerInfoCheckBox.Text = "Send playerlist of your current server in bf1 to Gametools (anonymous)";
+            this.GatherServerInfoCheckBox.Text = "Send playerlist of your current BF1 server to Gametools (anonymous)";
             this.GatherServerInfoCheckBox.UseVisualStyleBackColor = true;
             this.GatherServerInfoCheckBox.CheckedChanged += new System.EventHandler(this.GatherServerInfoCheckBox_CheckedChanged);
             // 

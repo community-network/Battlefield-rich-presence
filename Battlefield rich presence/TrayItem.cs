@@ -20,7 +20,7 @@ namespace BattlefieldRichPresence
                 Icon = Properties.Resources.TrayIcon,
                 ContextMenu = new ContextMenu(new[] {
                 new MenuItem("Next update in ...", Void),
-                new MenuItem("Copy bf1 sender id (anonymous)", Copy),
+                new MenuItem("Copy BF1 sender id (anonymous)", Copy),
                 new MenuItem("Edit settings", Edit),
                 new MenuItem("Exit", Exit),
             }),
