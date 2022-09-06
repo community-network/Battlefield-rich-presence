@@ -27,9 +27,6 @@ namespace BattlefieldRichPresence
             GatherServerInfo = Settings.Default.GatherServerInfo;
             PlayerNames = new Structs.GamesPlayerName()
             {
-                Bf1942 = Settings.Default.bf1942,
-                Bfvietnam = Settings.Default.bfvietnam,
-                Bf2142 = Settings.Default.bf2142,
                 Bfbc2 = Settings.Default.bfbc2,
                 Bf3 = Settings.Default.bf3,
                 Bf4 = Settings.Default.bf4, 
@@ -43,9 +40,6 @@ namespace BattlefieldRichPresence
             Settings.Default.GatherServerInfo = GatherServerInfo;
             Settings.Default.Guid = Guid;
 
-            Settings.Default.bf1942 = PlayerNames.Bf1942;
-            Settings.Default.bfvietnam = PlayerNames.Bfvietnam;
-            Settings.Default.bf2142 = PlayerNames.Bf2142;
             Settings.Default.bfbc2 = PlayerNames.Bfbc2;
             Settings.Default.bf3 = PlayerNames.Bf3;
             Settings.Default.bf4 = PlayerNames.Bf4;

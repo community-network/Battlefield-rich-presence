@@ -25,9 +25,6 @@ namespace BattlefieldRichPresence
         {
             return new Structs.GamesPlayerName()
             {
-                Bf1942 = playerNames.Bf1942,
-                Bfvietnam = playerNames.Bfvietnam,
-                Bf2142 = playerNames.Bf2142,
                 Bfbc2 = playerNames.Bfbc2,
                 Bf3 = playerNames.Bf3,
                 Bf4 = playerNames.Bf4,
