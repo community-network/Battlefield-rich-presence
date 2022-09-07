@@ -32,3 +32,5 @@ For Battlefield 3, 4, hardline, 5 and bad company 2, you need to configure your 
 ![image](https://user-images.githubusercontent.com/22680656/188842804-ca42b0ec-dfe1-495c-b03f-1d8aa2f8c817.png)
 
 The option to send the current playerlist to gametools is disabled by default, which we can use to display the kills/deaths of the current round in the detailed serverinfo page for Battlefield 1 servers.
+
+(linux: https://github.com/community-network/Battlefield-rich-presence-Linux)
