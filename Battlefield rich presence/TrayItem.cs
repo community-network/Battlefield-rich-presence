@@ -5,14 +5,13 @@ namespace BattlefieldRichPresence
 {
     public class TrayItem : ApplicationContext
     {
-        TimerPlus _timer = new TimerPlus();
-        TimerPlus _trayUpdateTimer = new TimerPlus();
-        private NotifyIcon _trayIcon;
-        private Config _config;
+        private readonly TimerPlus _timer = new();
+        private readonly TimerPlus _trayUpdateTimer = new();
+        private readonly Config _config = new();
+        private readonly NotifyIcon _trayIcon;
 
         public TrayItem()
         {
-            _config = new Config();
             // Initialize Tray Icon
             _trayIcon = new NotifyIcon
             {
@@ -25,6 +24,7 @@ namespace BattlefieldRichPresence
                 //new MenuItem($"Player: {_config.PlayerName}", Void),
                 new ToolStripMenuItem("Next update in ...", null, Void),
                 new ToolStripMenuItem("Edit settings", null, Edit),
+                new ToolStripMenuItem("Copy BF1 sender id (anonymous)", null, Copy),
                 new ToolStripMenuItem("Exit", null, Exit),
             });
             _trayIcon.ContextMenuStrip.Items[0].Enabled = false;
@@ -53,18 +53,20 @@ namespace BattlefieldRichPresence
         {
             if (_config.GatherServerInfo)
             {
-                _trayIcon.ContextMenu = new ContextMenu(new[] {
-                    new MenuItem("Next update in ...", Void),
-                    new MenuItem("Copy bf1 sender id (anonymous)", Copy),
-                    new MenuItem("Edit settings", Edit),
-                    new MenuItem("Exit", Exit),
+                _trayIcon.ContextMenuStrip.Items.Clear();
+                _trayIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[] {
+                    new ToolStripMenuItem("Next update in ...", null, Void),
+                    new ToolStripMenuItem("Copy bf1 sender id (anonymous)", null, Copy),
+                    new ToolStripMenuItem("Edit settings", null, Edit),
+                    new ToolStripMenuItem("Exit", null, Exit),
                 });
             } else
             {
-                _trayIcon.ContextMenu = new ContextMenu(new[] {
-                    new MenuItem("Next update in ...", Void),
-                    new MenuItem("Edit settings", Edit),
-                    new MenuItem("Exit", Exit),
+                _trayIcon.ContextMenuStrip.Items.Clear();
+                _trayIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[] {
+                    new ToolStripMenuItem("Next update in ...", null, Void),
+                    new ToolStripMenuItem("Edit settings", null, Edit),
+                    new ToolStripMenuItem("Exit", null, Exit),
                 });
             }
         }

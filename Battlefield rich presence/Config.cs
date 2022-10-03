@@ -1,4 +1,5 @@
 ﻿using BattlefieldRichPresence.Properties;
+using System;
 
 namespace BattlefieldRichPresence
 {

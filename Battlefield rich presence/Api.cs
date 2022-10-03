@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using BattlefieldRichPresence.Properties;
 using BattlefieldRichPresence.Structs;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace BattlefieldRichPresence
@@ -48,12 +46,12 @@ namespace BattlefieldRichPresence
             {
                 throw new Exception("not in a server");
             }
-            return jsonSerializer.Deserialize<ServerInfo>(data);
+            return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
         }
 
         public static void PostPlayerlist(GameReader.CurrentServerReader currentServerReader, Guid guid)
         {
-            var post = new
+            var payload = new
             {
                 guid = guid.ToString(),
                 serverinfo = new
@@ -73,13 +71,12 @@ namespace BattlefieldRichPresence
                     scoreteam2FromFlags = currentServerReader.Team2ScoreFromFlags,
                 }
             };
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            string dataString = jsonSerializer.Serialize(post);
-            WebClient webClient = new WebClient();
-            string jwtData = Jwt.Create(dataString, guid.ToString());
-            webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            string postData = jsonSerializer.Serialize(new { data = jwtData });
-            webClient.UploadString(new Uri("https://api.gametools.network/seederplayerlist/bf1"), "POST", postData);
+            string dataString = JsonConvert.SerializeObject(payload);
+            string jwtData = Jwt.Create(dataString);
+            string stringPayload = JsonConvert.SerializeObject(new { data = jwtData });
+            StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponse = new HttpClient().PostAsync("https://api.gametools.network/seederplayerlist/bf1", httpContent).Result;
+            _ = httpResponse.Content.ReadAsStringAsync().Result;
         }
     }
 }
