@@ -1,8 +1,4 @@
 ﻿using BattlefieldRichPresence.Properties;
-using BattlefieldRichPresence.Resources;
-using System;
-using System.Collections.Generic;
-using System.Web.Script.Serialization;
 
 namespace BattlefieldRichPresence
 {

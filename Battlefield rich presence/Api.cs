@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Net;
-using System.Web.Script.Serialization;
+using System.Net.Http;
 using BattlefieldRichPresence.Properties;
 using BattlefieldRichPresence.Structs;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BattlefieldRichPresence
 {
@@ -10,45 +12,43 @@ namespace BattlefieldRichPresence
     {
         public static ServerInfo GetServerInfo(string gameName, string serverName)
         {
-            var post = new
+            var payload = new
             {
                 name = serverName
             };
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            string dataString = jsonSerializer.Serialize(post);
-            WebClient webClient = new WebClient();
-            webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string data = webClient.UploadString(new Uri($"https://api.gametools.network/seedergame/{gameName}"), "POST", dataString);
-            return jsonSerializer.Deserialize<ServerInfo>(data);
+            string stringPayload = JsonConvert.SerializeObject(payload);
+            StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponse = new HttpClient().PostAsync($"https://api.gametools.network/seedergame/{gameName}", httpContent).Result;
+            string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
+            
         }
 
         public static ServerInfo OldTitleServerInfo(string unescapedPlayerName, string gameName)
         {
-            WebClient webClient = new WebClient();
             string playerName = Uri.EscapeDataString(unescapedPlayerName);
-            string data = webClient.DownloadString(new Uri($"https://api.bflist.io/{gameName}/v1/players/{playerName}/server"));
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Deserialize<ServerInfo>(data);
+            HttpResponseMessage httpResponse = new HttpClient().GetAsync($"https://api.bflist.io/{gameName}/v1/players/{playerName}/server").Result;
+            string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
 
         public static ServerInfo getBf5CurrentServer(string playerName)
         {
-            var post = new
+            var payload = new
             {
                 playerName = playerName
             };
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            string dataString = json_serializer.Serialize(post);
-            WebClient webClient = new WebClient();
+            string dataString = JsonConvert.SerializeObject(payload);
             string jwtData = Jwt.Create(dataString);
-            webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            string postData = json_serializer.Serialize(new { data = jwtData });
-            string data = webClient.UploadString(new Uri("https://api.gametools.network/currentserver/bf5"), "POST", postData);
-            if (data == "{}")
+            string stringPayload = JsonConvert.SerializeObject(new { data = jwtData });
+            StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponse = new HttpClient().PostAsync("https://api.gametools.network/currentserver/bf5", httpContent).Result;
+            string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+            if (responseContent == "{}")
             {
                 throw new Exception("not in a server");
             }
-            return json_serializer.Deserialize<ServerInfo>(data);
+            return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
         }
     }
 }
