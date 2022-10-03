@@ -41,17 +41,17 @@ namespace BattlefieldRichPresence.ChangePrensence
 
             List<Button> buttons = new List<Button>();
 
-            String api_name = gameInfo.ShortName.ToLower();
+            String apiName = gameInfo.ShortName.ToLower();
 
             if (gameInfo.Game != Resources.Statics.Game.Bf5)
             {
                 buttons.Add(new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName.ToLower()}/{extraInfo.GameId}" });
             } else
             {
-                api_name = "bfv";
+                apiName = "bfv";
             }
 
-            buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{api_name}/gameid/{extraInfo.GameId}/pc" });
+            buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{apiName}/gameid/{extraInfo.GameId}/pc" });
 
             presence.Buttons = buttons.ToArray();
             client.SetPresence(presence);

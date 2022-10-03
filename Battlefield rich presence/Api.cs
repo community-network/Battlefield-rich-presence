@@ -32,11 +32,11 @@ namespace BattlefieldRichPresence
             return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
 
-        public static ServerInfo getBf5CurrentServer(string playerName)
+        public static ServerInfo GetBf5CurrentServer(string playerName)
         {
             var payload = new
             {
-                playerName = playerName
+                playerName
             };
             string dataString = JsonConvert.SerializeObject(payload);
             string jwtData = Jwt.Create(dataString);
@@ -48,7 +48,38 @@ namespace BattlefieldRichPresence
             {
                 throw new Exception("not in a server");
             }
-            return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
+            return jsonSerializer.Deserialize<ServerInfo>(data);
+        }
+
+        public static void PostPlayerlist(GameReader.CurrentServerReader currentServerReader, Guid guid)
+        {
+            var post = new
+            {
+                guid = guid.ToString(),
+                serverinfo = new
+                {
+                    name = currentServerReader.ServerName,
+                    gameId = currentServerReader.GameId
+                },
+                teams = new
+                {
+                    team1 = currentServerReader.PlayerListsTeam1,
+                    team2 = currentServerReader.PlayerListsTeam2,
+                    scoreteam1 = currentServerReader.ServerScoreTeam1,
+                    scoreteam2 = currentServerReader.ServerScoreTeam2,
+                    scoreteam1FromKills = currentServerReader.Team1ScoreFromKill,
+                    scoreteam2FromKills = currentServerReader.Team2ScoreFromKill,
+                    scoreteam1FromFlags = currentServerReader.Team1ScoreFromFlags,
+                    scoreteam2FromFlags = currentServerReader.Team2ScoreFromFlags,
+                }
+            };
+            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            string dataString = jsonSerializer.Serialize(post);
+            WebClient webClient = new WebClient();
+            string jwtData = Jwt.Create(dataString, guid.ToString());
+            webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            string postData = jsonSerializer.Serialize(new { data = jwtData });
+            webClient.UploadString(new Uri("https://api.gametools.network/seederplayerlist/bf1"), "POST", postData);
         }
     }
 }

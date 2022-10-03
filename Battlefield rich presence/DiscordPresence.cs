@@ -137,6 +137,19 @@ namespace BattlefieldRichPresence
                             JoinLinkWeb = ""
                         };
                         UpdatePresence(gameInfo, serverInfo);
+
+                        // send info to gametools about server to show in detailed serverinfo page when enabled (privacy reasons)
+                        if (_config.GatherServerInfo)
+                        {
+                            try
+                            {
+                                Api.PostPlayerlist(currentServerReader, this._config.Guid);
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
                     }
                     else
                     {
@@ -149,7 +162,7 @@ namespace BattlefieldRichPresence
                 try
                 {
                     var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
-                    ServerInfo serverInfo = Api.getBf5CurrentServer(playerName);
+                    ServerInfo serverInfo = Api.GetBf5CurrentServer(playerName);
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)
@@ -157,11 +170,29 @@ namespace BattlefieldRichPresence
                     UpdatePresenceInMenu(gameInfo);
                 }
             }
-            else if (gameInfo.IsRunning && gameInfo.Game == Statics.Game.Bf2)
+            else if (gameInfo.IsRunning && Statics.GameDataReaderGames.Contains(gameInfo.Game))
             {
                 try
                 {
-                    var playerName = GameDataReaders.Bf2.ReadActivePlayer().OnlineName;
+                    string playerName;
+                    switch (gameInfo.Game)
+                    {
+                        case Statics.Game.Bf1942:
+                            playerName = GameDataReaders.Bf1942.ReadActivePlayer().OnlineName;
+                            break;
+                        case Statics.Game.Bfvietnam:
+                            playerName = GameDataReaders.BfVietnam.ReadActivePlayer().OnlineName;
+                            break;
+                        case Statics.Game.Bf2:
+                            playerName = GameDataReaders.Bf2.ReadActivePlayer().OnlineName;
+                            break;
+                        case Statics.Game.Bf2142:
+                            playerName = GameDataReaders.Bf2142.ReadActivePlayer().OnlineName;
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                    
                     ServerInfo serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName.ToLower());
                     UpdatePresence(gameInfo, serverInfo);
                 }

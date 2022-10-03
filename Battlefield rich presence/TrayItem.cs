@@ -49,16 +49,41 @@ namespace BattlefieldRichPresence
             _trayIcon.ContextMenuStrip.Items[0].Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft)/1000}";
         }
 
+        void UpdateTrayItems()
+        {
+            if (_config.GatherServerInfo)
+            {
+                _trayIcon.ContextMenu = new ContextMenu(new[] {
+                    new MenuItem("Next update in ...", Void),
+                    new MenuItem("Copy bf1 sender id (anonymous)", Copy),
+                    new MenuItem("Edit settings", Edit),
+                    new MenuItem("Exit", Exit),
+                });
+            } else
+            {
+                _trayIcon.ContextMenu = new ContextMenu(new[] {
+                    new MenuItem("Next update in ...", Void),
+                    new MenuItem("Edit settings", Edit),
+                    new MenuItem("Exit", Exit),
+                });
+            }
+        }
+
         void Void(object sender, EventArgs e) { }
 
         void Edit(object sender, EventArgs e)
         {
             using (var editWindow = new EditWindow())
             {
-                DialogResult result = editWindow.ShowDialog();
+                editWindow.ShowDialog();
                 _config.Refresh();
-                //_trayIcon.ContextMenu.MenuItems[0].Text = $"Player: {_config.PlayerName}";
+                UpdateTrayItems();
             }
+        }
+
+        void Copy(object sender, EventArgs e)
+        {
+            Clipboard.SetText(this._config.Guid.ToString());
         }
 
         void Exit(object sender, EventArgs e)

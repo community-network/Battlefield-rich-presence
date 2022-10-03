@@ -1,30 +1,31 @@
 ﻿using System;
+using System.Timers;
 
 namespace BattlefieldRichPresence
 {
-    internal class TimerPlus : System.Timers.Timer
+    internal class TimerPlus : Timer
     {
-        private DateTime m_dueTime;
+        private DateTime _mDueTime;
 
-        public TimerPlus() : base() => this.Elapsed += this.ElapsedAction;
+        public TimerPlus() => Elapsed += ElapsedAction;
 
         protected new void Dispose()
         {
-            this.Elapsed -= this.ElapsedAction;
+            Elapsed -= ElapsedAction;
             base.Dispose();
         }
 
-        public double TimeLeft => (this.m_dueTime - DateTime.Now).TotalMilliseconds;
+        public double TimeLeft => (_mDueTime - DateTime.Now).TotalMilliseconds;
         public new void Start()
         {
-            this.m_dueTime = DateTime.Now.AddMilliseconds(this.Interval);
+            _mDueTime = DateTime.Now.AddMilliseconds(Interval);
             base.Start();
         }
 
-        private void ElapsedAction(object sender, System.Timers.ElapsedEventArgs e)
+        private void ElapsedAction(object sender, ElapsedEventArgs e)
         {
-            if (this.AutoReset)
-                this.m_dueTime = DateTime.Now.AddMilliseconds(this.Interval);
+            if (AutoReset)
+                _mDueTime = DateTime.Now.AddMilliseconds(Interval);
         }
     }
 }

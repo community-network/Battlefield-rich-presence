@@ -41,6 +41,7 @@ namespace BattlefieldRichPresence
             this.LabelPlayerNameBox = new System.Windows.Forms.Label();
             this.GroupBoxPlayerName = new System.Windows.Forms.GroupBox();
             this.LabelInfoIcon = new System.Windows.Forms.Label();
+            this.GatherServerInfoCheckBox = new System.Windows.Forms.CheckBox();
             this.GroupBoxPlayerName.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,7 @@ namespace BattlefieldRichPresence
             // SaveButton
             // 
             this.SaveButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.SaveButton.Location = new System.Drawing.Point(156, 179);
+            this.SaveButton.Location = new System.Drawing.Point(156, 201);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(247, 32);
             this.SaveButton.TabIndex = 3;
@@ -88,7 +89,7 @@ namespace BattlefieldRichPresence
             // ChangeAllButton
             // 
             this.ChangeAllButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.ChangeAllButton.Location = new System.Drawing.Point(21, 179);
+            this.ChangeAllButton.Location = new System.Drawing.Point(21, 201);
             this.ChangeAllButton.Name = "ChangeAllButton";
             this.ChangeAllButton.Size = new System.Drawing.Size(129, 32);
             this.ChangeAllButton.TabIndex = 5;
@@ -142,11 +143,23 @@ namespace BattlefieldRichPresence
             this.LabelInfoIcon.TabIndex = 8;
             this.LabelInfoIcon.Text = "ℹ";
             // 
+            // GatherServerInfoCheckBox
+            // 
+            this.GatherServerInfoCheckBox.AutoSize = true;
+            this.GatherServerInfoCheckBox.Location = new System.Drawing.Point(22, 177);
+            this.GatherServerInfoCheckBox.Name = "GatherServerInfoCheckBox";
+            this.GatherServerInfoCheckBox.Size = new System.Drawing.Size(354, 17);
+            this.GatherServerInfoCheckBox.TabIndex = 9;
+            this.GatherServerInfoCheckBox.Text = "Send playerlist of your current BF1 server to Gametools (anonymous)";
+            this.GatherServerInfoCheckBox.UseVisualStyleBackColor = true;
+            this.GatherServerInfoCheckBox.CheckedChanged += new System.EventHandler(this.GatherServerInfoCheckBox_CheckedChanged);
+            // 
             // EditWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 226);
+            this.ClientSize = new System.Drawing.Size(423, 251);
+            this.Controls.Add(this.GatherServerInfoCheckBox);
             this.Controls.Add(this.GroupBoxPlayerName);
             this.Controls.Add(this.ChangeAllButton);
             this.Controls.Add(this.SaveButton);
@@ -157,6 +170,7 @@ namespace BattlefieldRichPresence
             this.GroupBoxPlayerName.ResumeLayout(false);
             this.GroupBoxPlayerName.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -171,5 +185,6 @@ namespace BattlefieldRichPresence
         private Label LabelPlayerNameBox;
         private GroupBox GroupBoxPlayerName;
         private Label LabelInfoIcon;
+        private CheckBox GatherServerInfoCheckBox;
     }
 }
