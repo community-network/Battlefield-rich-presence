@@ -31,6 +31,7 @@ namespace BattlefieldRichPresence
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditWindow));
             this.PlayerNameBox = new System.Windows.Forms.TextBox();
             this.LabelInfoText = new System.Windows.Forms.Label();
@@ -42,13 +43,14 @@ namespace BattlefieldRichPresence
             this.GroupBoxPlayerName = new System.Windows.Forms.GroupBox();
             this.LabelInfoIcon = new System.Windows.Forms.Label();
             this.GatherServerInfoCheckBox = new System.Windows.Forms.CheckBox();
+            this.gatherDataCheckboxTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.GroupBoxPlayerName.SuspendLayout();
             this.SuspendLayout();
             // 
             // PlayerNameBox
             // 
-            this.PlayerNameBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerNameBox.Location = new System.Drawing.Point(88, 103);
+            this.PlayerNameBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PlayerNameBox.Location = new System.Drawing.Point(103, 119);
             this.PlayerNameBox.Name = "PlayerNameBox";
             this.PlayerNameBox.Size = new System.Drawing.Size(248, 25);
             this.PlayerNameBox.TabIndex = 0;
@@ -57,8 +59,8 @@ namespace BattlefieldRichPresence
             // LabelInfoText
             // 
             this.LabelInfoText.AutoSize = true;
-            this.LabelInfoText.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelInfoText.Location = new System.Drawing.Point(61, 36);
+            this.LabelInfoText.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelInfoText.Location = new System.Drawing.Point(71, 42);
             this.LabelInfoText.Name = "LabelInfoText";
             this.LabelInfoText.Size = new System.Drawing.Size(286, 15);
             this.LabelInfoText.TabIndex = 2;
@@ -66,10 +68,11 @@ namespace BattlefieldRichPresence
             // 
             // SaveButton
             // 
-            this.SaveButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.SaveButton.Location = new System.Drawing.Point(156, 201);
+            this.SaveButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SaveButton.Location = new System.Drawing.Point(182, 232);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(247, 32);
+            this.SaveButton.Size = new System.Drawing.Size(288, 37);
             this.SaveButton.TabIndex = 3;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -78,9 +81,10 @@ namespace BattlefieldRichPresence
             // GameSelector
             // 
             this.GameSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GameSelector.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameSelector.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.GameSelector.FormattingEnabled = true;
-            this.GameSelector.Location = new System.Drawing.Point(88, 69);
+            this.GameSelector.Location = new System.Drawing.Point(103, 80);
+            this.GameSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GameSelector.Name = "GameSelector";
             this.GameSelector.Size = new System.Drawing.Size(248, 25);
             this.GameSelector.TabIndex = 4;
@@ -88,10 +92,11 @@ namespace BattlefieldRichPresence
             // 
             // ChangeAllButton
             // 
-            this.ChangeAllButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.ChangeAllButton.Location = new System.Drawing.Point(21, 201);
+            this.ChangeAllButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ChangeAllButton.Location = new System.Drawing.Point(24, 232);
+            this.ChangeAllButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ChangeAllButton.Name = "ChangeAllButton";
-            this.ChangeAllButton.Size = new System.Drawing.Size(129, 32);
+            this.ChangeAllButton.Size = new System.Drawing.Size(150, 37);
             this.ChangeAllButton.TabIndex = 5;
             this.ChangeAllButton.Text = "Save for all games";
             this.ChangeAllButton.UseVisualStyleBackColor = true;
@@ -100,8 +105,9 @@ namespace BattlefieldRichPresence
             // LabelGameSelector
             // 
             this.LabelGameSelector.AutoSize = true;
-            this.LabelGameSelector.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelGameSelector.Location = new System.Drawing.Point(38, 74);
+            this.LabelGameSelector.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelGameSelector.Location = new System.Drawing.Point(44, 85);
+            this.LabelGameSelector.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelGameSelector.Name = "LabelGameSelector";
             this.LabelGameSelector.Size = new System.Drawing.Size(41, 15);
             this.LabelGameSelector.TabIndex = 6;
@@ -110,8 +116,9 @@ namespace BattlefieldRichPresence
             // LabelPlayerNameBox
             // 
             this.LabelPlayerNameBox.AutoSize = true;
-            this.LabelPlayerNameBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPlayerNameBox.Location = new System.Drawing.Point(37, 107);
+            this.LabelPlayerNameBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelPlayerNameBox.Location = new System.Drawing.Point(43, 123);
+            this.LabelPlayerNameBox.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelPlayerNameBox.Name = "LabelPlayerNameBox";
             this.LabelPlayerNameBox.Size = new System.Drawing.Size(42, 15);
             this.LabelPlayerNameBox.TabIndex = 7;
@@ -125,10 +132,12 @@ namespace BattlefieldRichPresence
             this.GroupBoxPlayerName.Controls.Add(this.PlayerNameBox);
             this.GroupBoxPlayerName.Controls.Add(this.LabelGameSelector);
             this.GroupBoxPlayerName.Controls.Add(this.GameSelector);
-            this.GroupBoxPlayerName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBoxPlayerName.Location = new System.Drawing.Point(21, 17);
+            this.GroupBoxPlayerName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.GroupBoxPlayerName.Location = new System.Drawing.Point(24, 20);
+            this.GroupBoxPlayerName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GroupBoxPlayerName.Name = "GroupBoxPlayerName";
-            this.GroupBoxPlayerName.Size = new System.Drawing.Size(382, 153);
+            this.GroupBoxPlayerName.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.GroupBoxPlayerName.Size = new System.Drawing.Size(446, 177);
             this.GroupBoxPlayerName.TabIndex = 8;
             this.GroupBoxPlayerName.TabStop = false;
             this.GroupBoxPlayerName.Text = "Configure in-game name (without prefix/clan tag)";
@@ -136,8 +145,9 @@ namespace BattlefieldRichPresence
             // LabelInfoIcon
             // 
             this.LabelInfoIcon.AutoSize = true;
-            this.LabelInfoIcon.Font = new System.Drawing.Font("Segoe UI Emoji", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelInfoIcon.Location = new System.Drawing.Point(35, 33);
+            this.LabelInfoIcon.Font = new System.Drawing.Font("Segoe UI Emoji", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelInfoIcon.Location = new System.Drawing.Point(41, 38);
+            this.LabelInfoIcon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelInfoIcon.Name = "LabelInfoIcon";
             this.LabelInfoIcon.Size = new System.Drawing.Size(30, 20);
             this.LabelInfoIcon.TabIndex = 8;
@@ -146,24 +156,27 @@ namespace BattlefieldRichPresence
             // GatherServerInfoCheckBox
             // 
             this.GatherServerInfoCheckBox.AutoSize = true;
-            this.GatherServerInfoCheckBox.Location = new System.Drawing.Point(22, 177);
+            this.GatherServerInfoCheckBox.Location = new System.Drawing.Point(26, 204);
+            this.GatherServerInfoCheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GatherServerInfoCheckBox.Name = "GatherServerInfoCheckBox";
-            this.GatherServerInfoCheckBox.Size = new System.Drawing.Size(354, 17);
+            this.GatherServerInfoCheckBox.Size = new System.Drawing.Size(399, 19);
             this.GatherServerInfoCheckBox.TabIndex = 9;
-            this.GatherServerInfoCheckBox.Text = "Send playerlist of your current BF1 server to Gametools (anonymous)";
+            this.GatherServerInfoCheckBox.Text = "Anonymously gather Battlefield 1 data for use with the api and widgets";
+            this.gatherDataCheckboxTooltip.SetToolTip(this.GatherServerInfoCheckBox, resources.GetString("GatherServerInfoCheckBox.ToolTip"));
             this.GatherServerInfoCheckBox.UseVisualStyleBackColor = true;
             this.GatherServerInfoCheckBox.CheckedChanged += new System.EventHandler(this.GatherServerInfoCheckBox_CheckedChanged);
             // 
             // EditWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 251);
+            this.ClientSize = new System.Drawing.Size(493, 290);
             this.Controls.Add(this.GatherServerInfoCheckBox);
             this.Controls.Add(this.GroupBoxPlayerName);
             this.Controls.Add(this.ChangeAllButton);
             this.Controls.Add(this.SaveButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "EditWindow";
             this.Text = "Edit settings";
@@ -186,5 +199,6 @@ namespace BattlefieldRichPresence
         private GroupBox GroupBoxPlayerName;
         private Label LabelInfoIcon;
         private CheckBox GatherServerInfoCheckBox;
+        private ToolTip gatherDataCheckboxTooltip;
     }
 }

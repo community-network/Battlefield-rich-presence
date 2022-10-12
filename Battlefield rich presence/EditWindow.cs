@@ -45,7 +45,7 @@ namespace BattlefieldRichPresence
             }
             if (hasChanges)
             {
-                DialogResult dialogResult = MessageBox.Show("You have unsaved changes, do want to save them?", "Message editor", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("You have unsaved changes, do want to save them?", "Unsaved changes", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     Save();
