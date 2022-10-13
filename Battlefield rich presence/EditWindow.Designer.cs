@@ -98,7 +98,7 @@ namespace BattlefieldRichPresence
             this.ChangeAllButton.Name = "ChangeAllButton";
             this.ChangeAllButton.Size = new System.Drawing.Size(150, 37);
             this.ChangeAllButton.TabIndex = 5;
-            this.ChangeAllButton.Text = "Save for all games";
+            this.ChangeAllButton.Text = "Save name for all games";
             this.ChangeAllButton.UseVisualStyleBackColor = true;
             this.ChangeAllButton.Click += new System.EventHandler(this.ChangeAllButton_Click);
             // 

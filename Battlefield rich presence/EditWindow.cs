@@ -70,7 +70,7 @@ namespace BattlefieldRichPresence
         private void GameSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             var gameName = GameSelector.SelectedItem.ToString();
-            SaveButton.Text = $"Save for {GameSelector.SelectedItem}";
+            SaveButton.Text = $"Save name for {GameSelector.SelectedItem}";
             string playerName = (string)_current[gameName];
             PlayerNameBox.Text = playerName ?? "";
         }
@@ -92,6 +92,7 @@ namespace BattlefieldRichPresence
         private void GatherServerInfoCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _config.GatherServerInfo = GatherServerInfoCheckBox.Checked;
+            _config.Update();
         }
     }
 }
