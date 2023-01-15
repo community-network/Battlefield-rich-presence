@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattlefieldRichPresence.Resources;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,6 +30,12 @@ namespace BattlefieldRichPresence.GameReader
         public int Team2ScoreFromFlags { get; private set; }
 
         public string player_vehicle { get; private set; }
+
+        public long PSender { get; private set; }
+        public long PContent { get; private set; }
+        public string ChatSender { get; private set; }
+        public string ChatContent { get; private set; }
+
 
         public CurrentServerReader()
         {
@@ -67,7 +74,7 @@ namespace BattlefieldRichPresence.GameReader
 
                 for (int i = 0; i < 74; i++)
                 {
-                    List<string> WeaponSlot = new List<string>();
+                    List<Dictionary<string, string>> WeaponSlot = new List<Dictionary<string, string>>();
                     var pClientPlayerBA = Player.GetPlayerById(i);
                     if (!Memory.IsValid(pClientPlayerBA))
                         continue;
@@ -79,8 +86,13 @@ namespace BattlefieldRichPresence.GameReader
                     var playerName = Memory.ReadString(pClientPlayerBA + 0x40, 64); // Name
                     var m_teamId = Memory.Read<int>(pClientPlayerBA + 0x1C34); // Player currentt team
                     var m_playerIndex = Memory.Read<byte>(pClientPlayerBA + 0x1D7C); // Player server index
-                    var PersionID = Memory.Read<long>(pClientPlayerBA + 0x38); // PersonaId
-                    var SquadID = Memory.Read<int>(pClientPlayerBA + 0x1E50); // Unknown
+                    var spectator = Memory.Read<byte>(pClientPlayerBA + 0x1C31);
+                    var personaId = Memory.Read<long>(pClientPlayerBA + 0x38); // PersonaId
+                    var squadID = Memory.Read<int>(pClientPlayerBA + 0x1E50); // Unknown
+
+                    var offset = Memory.Read<long>(pClientPlayerBA + 0x11A8);
+                    offset = Memory.Read<long>(offset + 0x28);
+                    var playerClass = Statics.getPlayerClass(Memory.ReadString(offset, 64)); // player class
 
                     var pClientVehicleEntity = Memory.Read<long>(pClientPlayerBA + 0x1D38);
                     if (Memory.IsValid(pClientVehicleEntity))
@@ -94,6 +106,9 @@ namespace BattlefieldRichPresence.GameReader
                         player_vehicle = null;
 
                         var pClientSoldierEntity = Memory.Read<long>(pClientPlayerBA + 0x1D48);
+                        if (!Memory.IsValid(pClientSoldierEntity))
+                            playerClass = Statics.getPlayerClass("");
+
                         var pClientSoldierWeaponComponent = Memory.Read<long>(pClientSoldierEntity + 0x698);
                         var m_handler = Memory.Read<long>(pClientSoldierWeaponComponent + 0x8A8);
 
@@ -109,7 +124,7 @@ namespace BattlefieldRichPresence.GameReader
                             var weapon_id = Memory.ReadString(offset0, 64);
                             if (weapon_id != "")
                             {
-                                WeaponSlot.Add(weapon_id);
+                                WeaponSlot.Add(Statics.getItem(weapon_id));
                             }
                         }
                     }
@@ -120,19 +135,22 @@ namespace BattlefieldRichPresence.GameReader
                         teamId = m_teamId,
                         mark = m_playerIndex,
                         platoon = new Structs.Platoon()
-                        { 
+                        {
                             icon = platoonUrl,
                             name = platoonName,
                             tag = platoonTag
                         },
-                        squad_id = SquadID,
+                        player_class = playerClass,
+                        Spectator = spectator,
+                        squad_id = squadID,
+                        squad_name = Statics.getSquadName(squadID),
                         rank = 0,
                         name = playerName,
-                        player_id = PersionID,
+                        player_id = personaId,
                         kills = 0,
                         deaths = 0,
                         score = 0,
-                        vehicle = player_vehicle,
+                        vehicle = Statics.getItem(player_vehicle),
                         weapons = WeaponSlot
                     });
                 }
@@ -151,8 +169,6 @@ namespace BattlefieldRichPresence.GameReader
 
                     var Mark = Memory.Read<byte>(pClientScoreOffset + 0x300);
                     var Rank = Memory.Read<int>(pClientScoreOffset + 0x304);
-                    if (Rank == 0)
-                        continue;
                     var Kill = Memory.Read<int>(pClientScoreOffset + 0x308);
                     var Dead = Memory.Read<int>(pClientScoreOffset + 0x30C);
                     var Score = Memory.Read<int>(pClientScoreOffset + 0x314);
@@ -203,6 +219,15 @@ namespace BattlefieldRichPresence.GameReader
 
                 RefreshTime = DateTime.Now;
                 HasResults = true;
+
+                string sender = GameReader.Chat.GetLastChatSender(out long pSender);
+                string content = GameReader.Chat.GetLastChatContent(out long pContent);
+
+                PSender = pSender;
+                PContent = pContent;
+
+                ChatSender = sender;
+                ChatContent = content;
 
                 Memory.CloseHandle();
             }
