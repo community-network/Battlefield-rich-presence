@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
@@ -11,7 +12,7 @@ namespace BattlefieldRichPresence
         public static GameInfo IsRunning()
         {
             Process[] bf1942Processes = Process.GetProcessesByName("BF1942");
-            if (bf1942Processes.Length == 1)
+            if (bf1942Processes.Any())
             {
                 Statics.Game game = (Statics.Game)Enum.Parse(typeof(Statics.Game), Statics.ShortGameName[Statics.Game.Bf1942]);
                 return new GameInfo
