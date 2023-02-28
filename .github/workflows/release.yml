@@ -13,7 +13,6 @@ jobs:
 
     runs-on: windows-2019
     env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com
       SLN_PATH: Battlefield rich presence.sln
 
     steps:
@@ -27,15 +26,19 @@ jobs:
     
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.6
+    
+    - name: Find devenv.com and add it to PATH
+      run: |
+        $path = vswhere.exe -latest -find Common7\IDE | Select-Object -First 1
+        $env:Path += ";$($path)"
 
     - name: Restore nuget packages
       run: |
-        Test-Path -Path "%MSBUILD_PATH%" -PathType Leaf
-        & "%MSBUILD_PATH%" "%SLN_PATH%" /t: restore
+        devenv.com "%SLN_PATH%" /t: restore
     
     - name: Build
       run: |
-        & "%MSBUILD_PATH%" "%SLN_PATH%" /build release
+        devenv.com "%SLN_PATH%" /build release
 
     - name: Add tag to artifact name
       run: |
