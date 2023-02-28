@@ -29,7 +29,8 @@ jobs:
       uses: Nuget/setup-nuget@v1.0.6
 
     - name: Restore nuget packages
-      run: nuget restore "Battlefield rich presence.sln"
+      run: |
+        "%MSBUILD_PATH%" "%SLN_PATH%" /t: restore
     
     - name: Build
       run: |
