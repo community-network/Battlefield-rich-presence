@@ -29,8 +29,7 @@ jobs:
     
     - name: Find devenv.com and add it to PATH
       run: |
-        $path = vswhere.exe -latest -find Common7\IDE | Select-Object -First 1
-        $env:Path += ";$($path)"
+        vswhere.exe -latest -find Common7\IDE | Select-Object -First 1 | Add-Content $env:GITHUB_PATH
 
     - name: Restore nuget packages
       run: |
