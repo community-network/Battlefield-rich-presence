@@ -11,19 +11,6 @@ namespace BattlefieldRichPresence
     {
         public static GameInfo IsRunning()
         {
-            Process[] bf1942Processes = Process.GetProcessesByName("BF1942");
-            if (bf1942Processes.Any())
-            {
-                Statics.Game game = (Statics.Game)Enum.Parse(typeof(Statics.Game), Statics.ShortGameName[Statics.Game.Bf1942]);
-                return new GameInfo
-                {
-                    Game = game,
-                    IsRunning = true,
-                    ShortName = Statics.ShortGameName[game],
-                    FullName = Statics.FullGameName[game]
-                };
-            }
-
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
             {

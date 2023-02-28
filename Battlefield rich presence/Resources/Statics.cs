@@ -19,7 +19,7 @@ namespace BattlefieldRichPresence.Resources
             Bf5
         }
         // Regex group names need to match enum keys, since we need to map the matched group to an enum value 
-        public static readonly string SupportedGamesRegex = @"^(?:(?:battlefield(?:(?'Bf1'\u2122 1)|(?'Bf5'\u2122 V)|(?'Bf3' 3\u2122)|(?'Bf4' 4)|(?'Bfh' Hardline)|(?'Bfbc2': bad company 2)|(?'Bfvietnam' vietnam)))|(?:bf(?:(?'Bf2'2)|(?'Bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'Bf1942'bf1942 \(Ver: \w{3}, \d+ \w{3} \d+ [:0-9]+\)))$";
+        public static readonly string SupportedGamesRegex = @"^(?:(?:battlefield(?:(?'Bf1'\u2122 1)|(?'Bf5'\u2122 V)|(?'Bf3' 3\u2122)|(?'Bf4' 4)|(?'Bfh' Hardline)|(?'Bfbc2': bad company 2)|(?'Bfvietnam' vietnam)))|(?:bf(?:(?'Bf2'2)|(?'Bf2142'2142)) \(v1\.[\.\-0-9]+, pid: [0-9]+\))|(?'Bf1942'bf1942 \(Ver: \w+, \d+ \w+\.? \d+(?: [:0-9]+)?\)))$";
         public static readonly Dictionary<Game, string> ShortGameName = new Dictionary<Game, string>
         {
             { Game.Bf1942, "Bf1942" },
