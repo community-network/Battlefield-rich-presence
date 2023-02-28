@@ -30,11 +30,12 @@ jobs:
 
     - name: Restore nuget packages
       run: |
-        "%MSBUILD_PATH%" "%SLN_PATH%" /t: restore
+        Test-Path -Path "%MSBUILD_PATH%" -PathType Leaf
+        & "%MSBUILD_PATH%" "%SLN_PATH%" /t: restore
     
     - name: Build
       run: |
-        "%MSBUILD_PATH%" "%SLN_PATH%" /build release
+        & "%MSBUILD_PATH%" "%SLN_PATH%" /build release
 
     - name: Add tag to artifact name
       run: |
