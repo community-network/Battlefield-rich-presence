@@ -29,11 +29,13 @@ jobs:
 
     - name: Find devenv.com
       run: |
-        vswhere.exe -latest -products * -find **\devenv.com
+        vswhere.exe -help
+        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath | Select-Object -First 1 | Join-Path -ChildPath Common7\IDE\
     
     - name: Find devenv.com and add it to PATH
       run: |
-        vswhere.exe -latest -products * -find **\devenv.com | Select-Object -First 1  | Split-Path -Parent | Add-Content $env:GITHUB_PATH
+        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath | Select-Object -First 1 | Join-Path -ChildPath Common7\IDE\ | Add-Content $env:GITHUB_PATH
 
     - name: Restore nuget packages
       run: |
