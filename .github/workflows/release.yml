@@ -39,7 +39,7 @@ jobs:
 
     - name: Restore nuget packages
       run: |
-        devenv.com "%SLN_PATH%" /t: restore
+        msbuild /t:restore "Battlefield rich presence\Battlefield rich presence.csproj"
     
     - name: Build
       run: |
