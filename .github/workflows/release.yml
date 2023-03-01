@@ -43,7 +43,7 @@ jobs:
     
     - name: Build
       run: |
-        devenv.com "%SLN_PATH%" /build release
+        devenv.com $env:SLN_PATH /build release
 
     - name: Add tag to artifact name
       run: |
