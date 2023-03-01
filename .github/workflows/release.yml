@@ -12,8 +12,6 @@ jobs:
   build:
 
     runs-on: windows-2022
-    env:
-      SLN_PATH: Battlefield rich presence.sln
 
     steps:
     - uses: actions/checkout@v3.0.2
@@ -26,12 +24,6 @@ jobs:
     
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.6
-
-    - name: Find devenv.com
-      run: |
-        vswhere.exe -help
-        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath | Select-Object -First 1 | Join-Path -ChildPath Common7\IDE\
     
     - name: Find devenv.com and add it to PATH
       run: |
@@ -43,7 +35,7 @@ jobs:
     
     - name: Build
       run: |
-        devenv.com $env:SLN_PATH /build release
+        devenv.com "Battlefield rich presence.sln" /build release
 
     - name: Add tag to artifact name
       run: |
