@@ -26,10 +26,14 @@ jobs:
     
     - name: Setup Nuget
       uses: Nuget/setup-nuget@v1.0.6
+
+    - name: Find devenv.com
+      run: |
+        vswhere.exe -latest -products * -find **\devenv.com
     
     - name: Find devenv.com and add it to PATH
       run: |
-        vswhere.exe -latest -find Common7\IDE | Select-Object -First 1 | Add-Content $env:GITHUB_PATH
+        vswhere.exe -latest -products * -find **\devenv.com | Select-Object -First 1  | Split-Path -Parent | Add-Content $env:GITHUB_PATH
 
     - name: Restore nuget packages
       run: |
