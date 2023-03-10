@@ -7,6 +7,7 @@
         public string Bf4 { get; set; }
         public string Bfh { get; set; }
         public string Bf5 { get; set; }
+        public string Bf2042 { get; set; }
 
         public object this[string propertyName]
         {

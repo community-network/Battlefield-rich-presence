@@ -30,7 +30,7 @@ namespace BattlefieldRichPresence
             return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
 
-        public static ServerInfo GetBf5CurrentServer(string playerName)
+        public static ServerInfo GetCurrentServer(string playerName, Resources.Statics.Game game_name)
         {
             var payload = new
             {
@@ -40,7 +40,8 @@ namespace BattlefieldRichPresence
             string jwtData = Jwt.Create(dataString);
             string stringPayload = JsonConvert.SerializeObject(new { data = jwtData });
             StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
-            HttpResponseMessage httpResponse = new HttpClient().PostAsync("https://api.gametools.network/currentserver/bf5", httpContent).Result;
+            var url = $"https://api.gametools.network/currentserver/{Resources.Statics.ShortGameName[game_name].ToLower()}";
+            HttpResponseMessage httpResponse = new HttpClient().PostAsync(url, httpContent).Result;
             string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
             if (responseContent == "{}")
             {

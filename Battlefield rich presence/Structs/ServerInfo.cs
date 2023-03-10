@@ -14,6 +14,7 @@ namespace BattlefieldRichPresence.Structs
         public string MapLabel { get; set; }
         public string JoinLinkWeb { get; set; }
         public string GameId { get; set; }
+        public string ServerId { get; set; }
         public string GetPlayerCountString()
         {
             string playerString = $"{NumPlayers}";
