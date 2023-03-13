@@ -8,7 +8,6 @@ namespace BattlefieldRichPresence
 {
     internal class Game
     {
-
         public static GameInfo IsRunning()
         {
             Process[] processCollection = Process.GetProcesses();
