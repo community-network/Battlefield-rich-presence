@@ -11,7 +11,7 @@ namespace BattlefieldRichPresence.ChangePrensence
         {
             ServerInfo extraInfo = serverInfo;
 
-            if (gameInfo.Game != Resources.Statics.Game.Bf5)
+            if (!Resources.Statics.NewTitles.Contains(gameInfo.Game))
             {
                 extraInfo = Api.GetServerInfo(gameInfo.ShortName, serverInfo.Name);
             }
@@ -43,15 +43,24 @@ namespace BattlefieldRichPresence.ChangePrensence
 
             String apiName = gameInfo.ShortName.ToLower();
 
-            if (gameInfo.Game != Resources.Statics.Game.Bf5)
+            if (!Resources.Statics.NewTitles.Contains(gameInfo.Game))
             {
                 buttons.Add(new Button { Label = "Join", Url = $"https://joinme.click/g/{gameInfo.ShortName.ToLower()}/{extraInfo.GameId}" });
-            } else
+            } 
+            
+            if (gameInfo.Game == Resources.Statics.Game.Bf5)
             {
                 apiName = "bfv";
             }
 
-            buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{apiName}/gameid/{extraInfo.GameId}/pc" });
+            if (gameInfo.Game == Resources.Statics.Game.Bf2042)
+            {
+                buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{apiName}/serverid/{extraInfo.ServerId}/pc" });
+            } else
+            {
+                buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{apiName}/gameid/{extraInfo.GameId}/pc" });
+            }
+                
 
             presence.Buttons = buttons.ToArray();
             client.SetPresence(presence);

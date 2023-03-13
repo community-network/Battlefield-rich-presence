@@ -29,7 +29,8 @@ namespace BattlefieldRichPresence
                 Bf3 = playerNames.Bf3,
                 Bf4 = playerNames.Bf4,
                 Bfh = playerNames.Bfh,
-                Bf5 = playerNames.Bf5
+                Bf5 = playerNames.Bf5,
+                Bf2042 = playerNames.Bf2042
             };
         }
 

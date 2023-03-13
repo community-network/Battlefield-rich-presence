@@ -31,7 +31,8 @@ namespace BattlefieldRichPresence
                 Bf3 = Settings.Default.bf3,
                 Bf4 = Settings.Default.bf4, 
                 Bfh = Settings.Default.bfh,
-                Bf5 = Settings.Default.bf5
+                Bf5 = Settings.Default.bf5,
+                Bf2042 = Settings.Default.bf2042
             };
         }
 
@@ -45,6 +46,7 @@ namespace BattlefieldRichPresence
             Settings.Default.bf4 = PlayerNames.Bf4;
             Settings.Default.bfh = PlayerNames.Bfh;
             Settings.Default.bf5 = PlayerNames.Bf5;
+            Settings.Default.bf2042 = PlayerNames.Bf2042;
             Settings.Default.Save();
         }
     }

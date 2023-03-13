@@ -157,12 +157,12 @@ namespace BattlefieldRichPresence
                     }
                 }
             }
-            else if (gameInfo.Game == Statics.Game.Bf5)
+            else if (Statics.NewTitles.Contains(gameInfo.Game))
             {
                 try
                 {
                     var playerName = (string)_config.PlayerNames[gameInfo.ShortName];
-                    ServerInfo serverInfo = Api.GetBf5CurrentServer(playerName);
+                    ServerInfo serverInfo = Api.GetCurrentServer(playerName, gameInfo.Game);
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)

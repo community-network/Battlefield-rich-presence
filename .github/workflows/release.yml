@@ -1,0 +1,56 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v3.0.2
+        
+    - name: Find and Replace
+      run: ((Get-Content -path "Battlefield rich presence\\Jwt.cs" -Raw) -replace 'SUPERSECRETPLACEHOLDER','${{ secrets.JWTTOKEN }}') | Set-Content -Path "Battlefield rich presence\Jwt.cs"
+        
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+    
+    - name: Setup Nuget
+      uses: Nuget/setup-nuget@v1.0.6
+    
+    - name: Find devenv.com and add it to PATH
+      run: |
+        vswhere.exe -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath | Select-Object -First 1 | Join-Path -ChildPath Common7\IDE\ | Add-Content $env:GITHUB_PATH
+
+    - name: Restore nuget packages
+      run: |
+        nuget restore "Battlefield rich presence\Battlefield rich presence.csproj"
+    
+    - name: Build
+      run: |
+        devenv.com "Battlefield rich presence.sln" /build release
+
+    - name: Add tag to artifact name
+      run: |
+        Move-Item -Path "Battlefield-rich-presence-setup\\Release\\Battlefield-rich-presence-setup.msi" -Destination "Battlefield-rich-presence-setup-${{ github.ref_name }}.msi"
+
+    - name: Create hash files
+      run: |
+        $(Get-FileHash -Path Battlefield-rich-presence-setup-${{ github.ref_name }}.msi -Algorithm MD5).Hash.toLower() + "`n" | Out-File -NoNewline Battlefield-rich-presence-setup-${{ github.ref_name }}.msi.md5
+        $(Get-FileHash -Path Battlefield-rich-presence-setup-${{ github.ref_name }}.msi -Algorithm SHA256).Hash.toLower() + "`n" | Out-File -NoNewline Battlefield-rich-presence-setup-${{ github.ref_name }}.msi.sha256
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: Battlefield-rich-presence-setup-${{ github.ref_name }}.msi*
+        draft: true
+        generate_release_notes: true
+        name: Battlefield rich presence ${{ github.ref_name }}
+        body: This is the ${{ github.ref_name }} release of Battlefield rich presence.
