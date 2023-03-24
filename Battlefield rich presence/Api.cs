@@ -17,6 +17,7 @@ namespace BattlefieldRichPresence
             string stringPayload = JsonConvert.SerializeObject(payload);
             StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
             HttpResponseMessage httpResponse = new HttpClient().PostAsync($"https://api.gametools.network/seedergame/{gameName}", httpContent).Result;
+            httpResponse.EnsureSuccessStatusCode();
             string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
             
@@ -26,6 +27,11 @@ namespace BattlefieldRichPresence
         {
             string playerName = Uri.EscapeDataString(unescapedPlayerName);
             HttpResponseMessage httpResponse = new HttpClient().GetAsync($"https://api.bflist.io/{gameName}/v1/players/{playerName}/server").Result;
+
+            // bflist returns a 404 response if the player is not currently playing on a (known) server
+            // Throw an exception in that case to avoid returning empty ServerInfo
+            httpResponse.EnsureSuccessStatusCode();
+            
             string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
@@ -42,6 +48,7 @@ namespace BattlefieldRichPresence
             StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
             var url = $"https://api.gametools.network/currentserver/{Resources.Statics.ShortGameName[game_name].ToLower()}";
             HttpResponseMessage httpResponse = new HttpClient().PostAsync(url, httpContent).Result;
+            httpResponse.EnsureSuccessStatusCode();
             string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
             if (responseContent == "{}")
             {
