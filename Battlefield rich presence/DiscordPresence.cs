@@ -189,6 +189,9 @@ namespace BattlefieldRichPresence
                         case Statics.Game.Bf2142:
                             playerName = GameDataReaders.Bf2142.ReadActivePlayer().OnlineName;
                             break;
+                        case Statics.Game.Bfbc2:
+                            playerName = GameDataReaders.BfBc2.ReadActivePlayer().OnlineName;
+                            break;
                         default:
                             throw new NotImplementedException();
                     }
