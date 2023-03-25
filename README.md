@@ -28,7 +28,15 @@ To exit the tool, just right click the icon and select the "Exit" option.
 
 ![image](https://user-images.githubusercontent.com/22680656/189686901-d1206b36-3624-4e0b-bda0-f42fb8f50378.png)
 
-For Battlefield 3, 4, hardline, 5, 2042 (portal) and bad company 2, you need to configure your in game name. Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
+For the following games, you need to configure your in game name:
+
+- Battlefield 3
+- Battlefield 4
+- Battlefield Hardline
+- Battlefield 5
+- Battlefield 2042 (Portal)
+
+Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
 
 ![image](https://user-images.githubusercontent.com/22680656/188842804-ca42b0ec-dfe1-495c-b03f-1d8aa2f8c817.png)
 
