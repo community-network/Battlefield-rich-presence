@@ -10,24 +10,10 @@ namespace BattlefieldRichPresence.ChangePrensence
     {
         public static void Update(DiscordRpcClient client, DateTime startTime, GameInfo gameInfo, ServerInfo serverInfo)
         {
-            string mapName;
-            switch (gameInfo.Game)
-            {
-                case Statics.Game.Bf1942:
-                case Statics.Game.Bfvietnam:
-                case Statics.Game.Bf2:
-                case Statics.Game.Bf2142:
-                    mapName = serverInfo.MapName;
-                    break;
-                default:
-                    mapName = serverInfo.MapLabel;
-                    break;
-            }
-            
             RichPresence presence = new RichPresence
             {
                 Details = $"{serverInfo.Name}",
-                State = $"{serverInfo.GetPlayerCountString()} - {mapName}",
+                State = $"{serverInfo.GetPlayerCountString()} - {serverInfo.MapName}",
                 Timestamps = new Timestamps
                 {
                     Start = startTime

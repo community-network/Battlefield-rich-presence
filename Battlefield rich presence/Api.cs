@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using BattlefieldRichPresence.Structs;
 using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
 namespace BattlefieldRichPresence
@@ -32,6 +34,20 @@ namespace BattlefieldRichPresence
             // Throw an exception in that case to avoid returning empty ServerInfo
             httpResponse.EnsureSuccessStatusCode();
             
+            string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
+        }
+
+        public static ServerInfo GetBfbc2ServerInfo(string unescapedPlayerName)
+        {
+            var query = new Dictionary<string, string>()
+            {
+                ["name"] = Uri.EscapeDataString(unescapedPlayerName),
+                ["platform"] = "pc"
+            };
+            var uri = QueryHelpers.AddQueryString("https://api.gametools.network/bfbc2/currentserver/", query);
+            HttpResponseMessage httpResponse = new HttpClient().GetAsync(uri).Result;
+            httpResponse.EnsureSuccessStatusCode();
             string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
