@@ -14,7 +14,7 @@ Show your current Battlefield server via Discord rich presence. Others can join 
 - Battlefield Hardline
 - Battlefield 1
 - Battlefield 5
-- Battlefield 2042 (portal)
+- Battlefield 2042 (portal) - temporary broken
 
 Download the tool via the release tab on GitHub: https://github.com/community-network/Battlefield-rich-presence/releases/
 
@@ -34,7 +34,7 @@ For the following games, you need to configure your in game name:
 - Battlefield 4
 - Battlefield Hardline
 - Battlefield 5
-- Battlefield 2042 (Portal)
+- Battlefield 2042 (Portal) - temporary broken
 
 Right click on the taskbar icon and select "Edit settings". Then enter your in game name in the form and click "Save".
 
