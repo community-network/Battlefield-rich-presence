@@ -9,6 +9,7 @@ namespace BattlefieldRichPresence
         private readonly TimerPlus _trayUpdateTimer = new();
         private readonly Config _config = new();
         private readonly NotifyIcon _trayIcon;
+        private ToolStripMenuItem nextUpdateItem;
 
         public TrayItem()
         {
@@ -20,11 +21,11 @@ namespace BattlefieldRichPresence
                 ContextMenuStrip = new ContextMenuStrip(),
                 Visible = true
             };
+            nextUpdateItem = new ToolStripMenuItem("Next update in ...", null, Void);
             _trayIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[] {
                 //new MenuItem($"Player: {_config.PlayerName}", Void),
-                new ToolStripMenuItem("Next update in ...", null, Void),
+                nextUpdateItem,
                 new ToolStripMenuItem("Edit settings", null, Edit),
-                new ToolStripMenuItem("Copy BF1 sender id (anonymous)", null, Copy),
                 new ToolStripMenuItem("Exit", null, Exit),
             });
             _trayIcon.ContextMenuStrip.Items[0].Enabled = false;
@@ -46,29 +47,13 @@ namespace BattlefieldRichPresence
 
         void UpdateTray(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _trayIcon.ContextMenuStrip.Items[0].Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft)/1000}";
-        }
+            if (_trayIcon.ContextMenuStrip.IsHandleCreated == false)
+                return;
 
-        void UpdateTrayItems()
-        {
-            if (_config.GatherServerInfo)
+            _trayIcon.ContextMenuStrip.Invoke(() =>
             {
-                _trayIcon.ContextMenuStrip.Items.Clear();
-                _trayIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[] {
-                    new ToolStripMenuItem("Next update in ...", null, Void),
-                    new ToolStripMenuItem("Copy bf1 sender id (anonymous)", null, Copy),
-                    new ToolStripMenuItem("Edit settings", null, Edit),
-                    new ToolStripMenuItem("Exit", null, Exit),
-                });
-            } else
-            {
-                _trayIcon.ContextMenuStrip.Items.Clear();
-                _trayIcon.ContextMenuStrip.Items.AddRange(new ToolStripItem[] {
-                    new ToolStripMenuItem("Next update in ...", null, Void),
-                    new ToolStripMenuItem("Edit settings", null, Edit),
-                    new ToolStripMenuItem("Exit", null, Exit),
-                });
-            }
+                nextUpdateItem.Text = $"Next update in: {Convert.ToInt32(_timer.TimeLeft) / 1000}";
+            });
         }
 
         void Void(object sender, EventArgs e) { }
@@ -79,7 +64,6 @@ namespace BattlefieldRichPresence
             {
                 editWindow.ShowDialog();
                 _config.Refresh();
-                UpdateTrayItems();
             }
         }
 

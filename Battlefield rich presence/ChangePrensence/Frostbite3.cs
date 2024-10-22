@@ -60,7 +60,6 @@ namespace BattlefieldRichPresence.ChangePrensence
             {
                 buttons.Add(new Button { Label = "View server", Url = $"https://gametools.network/servers/{apiName}/gameid/{extraInfo.GameId}/pc" });
             }
-                
 
             presence.Buttons = buttons.ToArray();
             client.SetPresence(presence);

@@ -14,7 +14,6 @@ namespace BattlefieldRichPresence
         {
             InitializeComponent();
             _config = new Config();
-            GatherServerInfoCheckBox.Checked = _config.GatherServerInfo;
             _current = Clone(_config.PlayerNames);
             GameSelector.DataSource = Statics.NameChangeUiGames;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -29,6 +28,7 @@ namespace BattlefieldRichPresence
                 Bf3 = playerNames.Bf3,
                 Bf4 = playerNames.Bf4,
                 Bfh = playerNames.Bfh,
+                Bf1 = playerNames.Bf1,
                 Bf5 = playerNames.Bf5,
                 Bf2042 = playerNames.Bf2042
             };
@@ -90,10 +90,5 @@ namespace BattlefieldRichPresence
             }
         }
 
-        private void GatherServerInfoCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            _config.GatherServerInfo = GatherServerInfoCheckBox.Checked;
-            _config.Update();
-        }
     }
 }

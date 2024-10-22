@@ -72,35 +72,5 @@ namespace BattlefieldRichPresence
             }
             return JsonConvert.DeserializeObject<ServerInfo>(responseContent);
         }
-
-        public static void PostPlayerlist(GameReader.CurrentServerReader currentServerReader, Guid guid)
-        {
-            var payload = new
-            {
-                guid = guid.ToString(),
-                serverinfo = new
-                {
-                    name = currentServerReader.ServerName,
-                    gameId = currentServerReader.GameId
-                },
-                teams = new
-                {
-                    team1 = currentServerReader.PlayerListsTeam1,
-                    team2 = currentServerReader.PlayerListsTeam2,
-                    scoreteam1 = currentServerReader.ServerScoreTeam1,
-                    scoreteam2 = currentServerReader.ServerScoreTeam2,
-                    scoreteam1FromKills = currentServerReader.Team1ScoreFromKill,
-                    scoreteam2FromKills = currentServerReader.Team2ScoreFromKill,
-                    scoreteam1FromFlags = currentServerReader.Team1ScoreFromFlags,
-                    scoreteam2FromFlags = currentServerReader.Team2ScoreFromFlags,
-                }
-            };
-            string dataString = JsonConvert.SerializeObject(payload);
-            string jwtData = Jwt.Create(dataString);
-            string stringPayload = JsonConvert.SerializeObject(new { data = jwtData });
-            StringContent httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
-            HttpResponseMessage httpResponse = new HttpClient().PostAsync("https://api.gametools.network/seederplayerlist/bf1", httpContent).Result;
-            _ = httpResponse.Content.ReadAsStringAsync().Result;
-        }
     }
 }

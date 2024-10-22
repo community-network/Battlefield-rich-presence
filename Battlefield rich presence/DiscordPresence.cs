@@ -1,6 +1,5 @@
 ﻿using System;
 using BattlefieldRichPresence.ChangePrensence;
-using BattlefieldRichPresence.GameReader;
 using BattlefieldRichPresence.Resources;
 using BattlefieldRichPresence.Structs;
 using DiscordRPC;
@@ -122,42 +121,7 @@ namespace BattlefieldRichPresence
         {
             GameInfo gameInfo = Game.IsRunning();
             StartStopDiscord(gameInfo);
-            if (gameInfo.Game == Statics.Game.Bf1)
-            {
-                CurrentServerReader currentServerReader = new CurrentServerReader();
-                if (currentServerReader.HasResults)
-                {
-                    if (currentServerReader.PlayerListsAll.Count > 0 && currentServerReader.ServerName != "")
-                    {
-                        ServerInfo serverInfo = new ServerInfo
-                        {
-                            Name = currentServerReader.ServerName,
-                            NumPlayers = currentServerReader.PlayerListsAll.Count,
-                            MaxPlayers = 0,
-                            JoinLinkWeb = ""
-                        };
-                        UpdatePresence(gameInfo, serverInfo);
-
-                        // send info to gametools about server to show in detailed serverinfo page when enabled (privacy reasons)
-                        if (_config.GatherServerInfo)
-                        {
-                            try
-                            {
-                                Api.PostPlayerlist(currentServerReader, this._config.Guid);
-                            }
-                            catch (Exception)
-                            {
-
-                            }
-                        }
-                    }
-                    else
-                    {
-                        UpdatePresenceInMenu(gameInfo);
-                    }
-                }
-            }
-            else if (Statics.NewTitles.Contains(gameInfo.Game))
+            if (Statics.NewTitles.Contains(gameInfo.Game))
             {
                 try
                 {

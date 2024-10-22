@@ -51,6 +51,7 @@ namespace BattlefieldRichPresence.Resources
         };
         public static readonly List<Game> NewTitles = new List<Game> 
         {
+            Game.Bf1,
             Game.Bf5,
             Game.Bf2042,
         };
@@ -59,6 +60,7 @@ namespace BattlefieldRichPresence.Resources
             Game.Bf3,
             Game.Bf4,
             Game.Bfh,
+            Game.Bf1,
             Game.Bf5,
             Game.Bf2042
         };

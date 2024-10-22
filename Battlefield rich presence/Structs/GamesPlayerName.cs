@@ -6,6 +6,7 @@
         public string Bf3 { get; set; }
         public string Bf4 { get; set; }
         public string Bfh { get; set; }
+        public string Bf1 { get; set; }
         public string Bf5 { get; set; }
         public string Bf2042 { get; set; }
 
