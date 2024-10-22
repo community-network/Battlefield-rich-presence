@@ -14,16 +14,21 @@ jobs:
     runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v3.0.2
+    - uses: actions/checkout@v4.2.1
         
     - name: Find and Replace
       run: ((Get-Content -path "Battlefield rich presence\\Jwt.cs" -Raw) -replace 'SUPERSECRETPLACEHOLDER','${{ secrets.JWTTOKEN }}') | Set-Content -Path "Battlefield rich presence\Jwt.cs"
         
+    - name: Update dotnet
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v2
     
     - name: Setup Nuget
-      uses: Nuget/setup-nuget@v1.0.6
+      uses: Nuget/setup-nuget@v2.0.0
     
     - name: Find devenv.com and add it to PATH
       run: |
