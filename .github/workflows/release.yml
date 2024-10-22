@@ -18,11 +18,6 @@ jobs:
         
     - name: Find and Replace
       run: ((Get-Content -path "Battlefield rich presence\\Jwt.cs" -Raw) -replace 'SUPERSECRETPLACEHOLDER','${{ secrets.JWTTOKEN }}') | Set-Content -Path "Battlefield rich presence\Jwt.cs"
-        
-    - name: Update dotnet
-    - uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
