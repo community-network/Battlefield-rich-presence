@@ -13,6 +13,12 @@ namespace BattlefieldRichPresence
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
             {
+                // Avoid running regex for processes without a main window/an empty title
+                if (p.MainWindowHandle == IntPtr.Zero || p.MainWindowTitle == string.Empty)
+                {
+                    continue;
+                }
+                
                 Regex rgx = new Regex(Statics.SupportedGamesRegex, RegexOptions.IgnoreCase);
                 Match match = rgx.Match(p.MainWindowTitle);
                 if (match.Success)
