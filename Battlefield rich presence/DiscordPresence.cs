@@ -160,16 +160,7 @@ namespace BattlefieldRichPresence
                             throw new NotImplementedException();
                     }
 
-                    ServerInfo serverInfo;
-                    switch (gameInfo.Game)
-                    {
-                        case Statics.Game.Bfbc2:
-                            serverInfo = Api.GetBfbc2ServerInfo(playerName);
-                            break;
-                        default:
-                            serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName.ToLower());
-                            break;
-                    }
+                    var serverInfo = Api.OldTitleServerInfo(playerName, gameInfo.ShortName.ToLower());
                     UpdatePresence(gameInfo, serverInfo);
                 }
                 catch (Exception)

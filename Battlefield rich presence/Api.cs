@@ -38,20 +38,6 @@ namespace BattlefieldRichPresence
             return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
         }
 
-        public static ServerInfo GetBfbc2ServerInfo(string unescapedPlayerName)
-        {
-            var query = new Dictionary<string, string>()
-            {
-                ["name"] = Uri.EscapeDataString(unescapedPlayerName),
-                ["platform"] = "pc"
-            };
-            var uri = QueryHelpers.AddQueryString("https://api.gametools.network/bfbc2/currentserver/", query);
-            HttpResponseMessage httpResponse = new HttpClient().GetAsync(uri).Result;
-            httpResponse.EnsureSuccessStatusCode();
-            string responseContent = httpResponse.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<ServerInfo> (responseContent);
-        }
-
         public static ServerInfo GetCurrentServer(string playerName, Resources.Statics.Game game_name)
         {
             var payload = new
