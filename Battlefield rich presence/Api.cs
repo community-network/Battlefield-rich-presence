@@ -28,7 +28,7 @@ namespace BattlefieldRichPresence
         public static ServerInfo OldTitleServerInfo(string unescapedPlayerName, string gameName)
         {
             string playerName = Uri.EscapeDataString(unescapedPlayerName);
-            HttpResponseMessage httpResponse = new HttpClient().GetAsync($"https://api.bflist.io/{gameName}/v1/players/{playerName}/server").Result;
+            HttpResponseMessage httpResponse = new HttpClient().GetAsync($"https://api.bflist.io/v2/{gameName}/players/{playerName}/server").Result;
 
             // bflist returns a 404 response if the player is not currently playing on a (known) server
             // Throw an exception in that case to avoid returning empty ServerInfo
